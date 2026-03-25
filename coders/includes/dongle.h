@@ -1,17 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   codexion.c                                         :+:      :+:    :+:   */
+/*   dongle.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/24 15:03:21 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/24 16:15:41 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/25 11:50:04 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/25 13:40:21 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef DONGLE_H
+# define DONGLE_H
 
-int	main(int argc, char **argv)
+# include <pthread.h>
+
+typedef struct s_dongle
 {
-	return 0;
-}
+	int				cooldown;
+	pthread_mutex_t	cooldown_mutex;
+}					t_dongle;
+
+#endif
