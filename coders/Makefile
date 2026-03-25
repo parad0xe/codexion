@@ -2,13 +2,13 @@
 NAME = codexion
 ARGS = 
 
-# Directories
+# directories
 SRC_DIR = src
 TEST_DIR = tests
 BUILD_DIR = build
 INCLUDE_DIR = includes
 
-# Compiler and flags
+# compiler and flags
 CC = cc
 CFLAGS = -MMD -MP -pthread
 MAKEFLAGS += -j $$(nproc)
@@ -32,14 +32,14 @@ SRCS =\
 	  $(SRC_DIR)/heapq/heapq_debug.c\
 	  $(SRC_DIR)/main.c\
 
+TEST_SRCS =\
+		   $(TEST_DIR)/_core/test_utils.c
+
 TESTS =\
 	   $(TEST_DIR)/heapq/test_heapq_create.c\
 	   $(TEST_DIR)/heapq/test_heapq_enqueue.c\
 	   $(TEST_DIR)/heapq/test_heapq_dequeue.c\
 	   $(TEST_DIR)/heapq/test_heapq_destroy.c\
-
-TEST_CORE =\
-		   $(TEST_DIR)/_core/test_utils.c
 
 # main objects
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
@@ -62,6 +62,9 @@ all $(NAME) &:
 		CFLAGS="$(CFLAGS) -Wall -Wextra -Werror" \
 		--no-print-directory
 
+check: all
+	$(VALGRIND) ./$(NAME)
+
 build-debug:
 	@$(MAKE) $(NAME) \
 		CFLAGS="$(CFLAGS) -g3" \
@@ -70,20 +73,20 @@ build-debug:
 debug: build-debug
 	./$(NAME)
 
-check: build-debug
+check-debug: build-debug
 	$(VALGRIND) ./$(NAME)
 
 tests:
 	@$(MAKE) tests-run \
 		CFLAGS="$(CFLAGS) -g3" \
-		SRCS="$(SRCS) $(TEST_CORE)" \
+		SRCS="$(SRCS) $(TEST_SRCS)" \
 		INCLUDES="$(INCLUDES) -I tests/_core" \
 		--no-print-directory
 
 check-tests:
 	@$(MAKE) check-tests-run \
 		CFLAGS="$(CFLAGS) -g3" \
-		SRCS="$(SRCS) $(TEST_CORE)" \
+		SRCS="$(SRCS) $(TEST_SRCS)" \
 		INCLUDES="$(INCLUDES) -I tests/_core" \
 		--no-print-directory
 
@@ -95,7 +98,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all build-debug debug check tests check-tests clean fclean re
+.PHONY: all check build-debug debug check-debug tests check-tests clean fclean re
 
 else
 

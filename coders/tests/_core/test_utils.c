@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 21:40:16 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/25 22:00:12 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/25 22:24:10 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	print_test_ko(void)
 	printf("\033[0;31m✘ ko\033[0m\n");
 }
 
-void	custom_assert(int condition)
+void	custom_assert(char *message, int condition)
 {
 	if (!condition)
 	{
-		print_test_ko();
+		printf("\033[0;31m✘ ko: %s\033[0m\n", message);
 		exit(1);
 	}
 }

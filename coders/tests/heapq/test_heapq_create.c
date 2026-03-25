@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:53:05 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/25 21:59:12 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/25 22:39:43 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ int	main(void)
 
 	print_test_start("heapq create");
 	heap = heapq_create();
-	custom_assert(heap != NULL);
-	custom_assert(heap->queue != NULL);
-	custom_assert(heap->size == 0);
-	custom_assert(heap->capacity > 0);
+	custom_assert("it should create a valid heap", heap != NULL);
+	custom_assert("it should initialize the internal queue",
+		heap->queue != NULL);
+	custom_assert("it should start with size 0", heap->size == 0);
+	custom_assert("it should start with capacity 2", heap->capacity == 2);
 	heapq_destroy(&heap);
-	custom_assert(heap == NULL);
+	custom_assert("it should set heap to NULL after destroy", heap == NULL);
 	print_test_ok();
 	return (0);
 }
