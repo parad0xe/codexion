@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   absmod.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 14:20:28 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/26 19:58:57 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/25 14:19:43 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/26 19:59:05 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+int	absmod(int n, int mod)
+{
+	int	remainder;
 
-int	absmod(int n, int mod);
-
-#endif
+	remainder = n % mod;
+	if (remainder < 0)
+		return (remainder + mod);
+	return (remainder);
+}

@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:03:21 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/25 22:05:05 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/26 20:03:30 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	debug_args(t_args args)
 int	parse_args(t_args *args)
 {
 	args->number_of_coders = 4;
-	args->time_to_burnout = 400;
+	args->time_to_burnout = 4000;
 	args->time_to_compile = 400;
 	args->time_to_debug = 400;
 	args->time_to_refactor = 400;
