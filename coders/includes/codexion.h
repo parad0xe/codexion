@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 10:35:30 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 16:46:33 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 18:24:01 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 // dongle errors
 # define ERR_DONGLE_MALLOC 20
 # define ERR_DONGLE_MANAGER_MALLOC 21
+
+// workspace errors
+# define ERR_WORKSPACE_MALLOC 30
 
 typedef int	t_errcode;
 
