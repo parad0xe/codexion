@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 10:46:34 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 11:51:46 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 19:24:17 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	main(void)
 
 	pthread_mutex_init(&mutex, NULL);
 	dongles = dongles_create(3, 10);
-	managers = dongle_managers_create(&mutex, dongles, 3, 10);
+	managers = dongle_managers_create(&mutex, dongles, 3);
 	_test_assign(&mutex, managers, dongles);
-	dongle_managers_destroy(&managers, 3);
+	dongle_managers_destroy(&managers);
 	dongles_destroy(&dongles, 3);
 	pthread_mutex_destroy(&mutex);
 	return (0);

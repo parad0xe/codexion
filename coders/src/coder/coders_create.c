@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 16:45:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 16:58:07 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 19:20:31 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 t_coder	*coders_create(t_args *args, t_dongle_manager_pool *pool)
 {
 	t_coder	*coders;
-	int		i;
+	size_t	i;
 
 	if (args == NULL || pool == NULL)
 		return (NULL);
@@ -26,8 +26,8 @@ t_coder	*coders_create(t_args *args, t_dongle_manager_pool *pool)
 	coders = malloc(sizeof(t_coder) * args->number_of_coders);
 	if (coders == NULL)
 		return (NULL);
-	i = -1;
-	while (++i < args->number_of_coders)
+	i = 0;
+	while (i < args->number_of_coders)
 	{
 		coders[i].dongle_manager = &pool->managers[i];
 		coders[i].time_to_burnout = args->time_to_burnout;
@@ -35,6 +35,7 @@ t_coder	*coders_create(t_args *args, t_dongle_manager_pool *pool)
 		coders[i].time_to_debug = args->time_to_debug;
 		coders[i].time_to_refactor = args->time_to_refactor;
 		coders[i].number_of_compiles = args->number_of_compiles;
+		i++;
 	}
 	return (coders);
 }

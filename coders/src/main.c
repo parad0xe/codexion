@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:03:21 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 18:27:56 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 19:26:54 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 void	debug_args(t_args args)
 {
 	printf("---- debug args ----\n");
-	printf("number_of_coders   : %d\n", args.number_of_coders);
-	printf("time_to_burnout    : %d\n", args.time_to_burnout);
-	printf("time_to_compile    : %d\n", args.time_to_compile);
-	printf("time_to_debug      : %d\n", args.time_to_debug);
-	printf("time_to_refactor   : %d\n", args.time_to_refactor);
-	printf("number_of_compiles : %d\n", args.number_of_compiles);
-	printf("dongle_cooldown    : %d\n", args.dongle_cooldown);
+	printf("number_of_coders   : %ld\n", args.number_of_coders);
+	printf("time_to_burnout    : %ld\n", args.time_to_burnout);
+	printf("time_to_compile    : %ld\n", args.time_to_compile);
+	printf("time_to_debug      : %ld\n", args.time_to_debug);
+	printf("time_to_refactor   : %ld\n", args.time_to_refactor);
+	printf("number_of_compiles : %ld\n", args.number_of_compiles);
+	printf("dongle_cooldown    : %ld\n", args.dongle_cooldown);
 	printf("scheduler          : %s\n", args.scheduler);
 	printf("--------------------\n");
 }
@@ -46,7 +46,6 @@ int	parse_args(t_args *args)
 int	stop(t_workspace *workspace, int errcode)
 {
 	char	*message;
-	size_t	l;
 
 	if (errcode != 0)
 	{
@@ -62,6 +61,8 @@ int	main(int argc, char **argv)
 	t_args		args;
 	t_workspace	*workspace;
 
+	(void)argc;
+	(void)argv;
 	parse_args(&args);
 	workspace = workspace_create(&args);
 	if (workspace == NULL)

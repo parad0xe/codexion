@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:49:16 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 18:05:13 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 19:25:07 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ typedef struct s_coder
 
 t_coder					*coders_create(t_args *args,
 							t_dongle_manager_pool *pool);
-void					coders_destroy(t_coder **coders, size_t count);
+void					coders_destroy(t_coder **coders);
 
 #endif

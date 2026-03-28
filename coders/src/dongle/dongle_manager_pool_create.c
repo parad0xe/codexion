@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 09:18:29 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 10:41:48 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 19:23:53 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_errcode	_init(t_dongle_manager_pool *pool, size_t dongle_count,
 	if (pool->dongles == NULL)
 		return (ERR_DONGLE_MALLOC);
 	pool->managers = dongle_managers_create(&pool->shared_mutex, pool->dongles,
-			dongle_count, cooldown);
+			dongle_count);
 	if (pool->managers == NULL)
 		return (ERR_DONGLE_MANAGER_MALLOC);
 	return (0);

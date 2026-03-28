@@ -6,12 +6,14 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 10:35:30 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 18:24:01 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 19:22:41 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CODEXION_H
 # define CODEXION_H
+
+# include <stddef.h>
 
 // project-side errors
 # define ERR_MALLOC 1
@@ -33,13 +35,13 @@ typedef int	t_errcode;
 
 typedef struct s_args
 {
-	int		number_of_coders;
-	int		time_to_burnout;
-	int		time_to_compile;
-	int		time_to_debug;
-	int		time_to_refactor;
-	int		number_of_compiles;
-	int		dongle_cooldown;
+	size_t	number_of_coders;
+	size_t	time_to_burnout;
+	size_t	time_to_compile;
+	size_t	time_to_debug;
+	size_t	time_to_refactor;
+	size_t	number_of_compiles;
+	size_t	dongle_cooldown;
 	char	*scheduler;
 }			t_args;
 

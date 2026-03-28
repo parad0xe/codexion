@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 20:00:36 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 09:58:19 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 19:21:58 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 
 void	dongles_destroy(t_dongle **dongles, size_t count)
 {
-	int	i;
+	size_t	i;
 
 	if (*dongles == NULL)
 		return ;
-	i = -1;
-	while (++i < count)
+	i = 0;
+	while (i < count)
 	{
-		if ((*dongles)[i].queue == NULL)
-			continue ;
-		heapq_destroy(&(*dongles)[i].queue);
+		if ((*dongles)[i].queue != NULL)
+			heapq_destroy(&(*dongles)[i].queue);
+		i++;
 	}
 	free(*dongles);
 	(*dongles) = NULL;

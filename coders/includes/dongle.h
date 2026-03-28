@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:50:04 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 10:12:32 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 19:23:40 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ t_dongle_manager_pool	*dmp_create(size_t dongle_count, int cooldown);
 void					dmp_destroy(t_dongle_manager_pool **pool);
 
 t_dongle_manager		*dongle_managers_create(pthread_mutex_t *mutex,
-							t_dongle *dongles, size_t dongle_count,
-							int dongle_cooldown);
-void					dongle_managers_destroy(t_dongle_manager **managers,
-							size_t dongle_count);
+							t_dongle *dongles, size_t dongle_count);
+void					dongle_managers_destroy(t_dongle_manager **managers);
 
 t_dongle				*dongles_create(size_t count, int dongle_cooldown);
 void					dongles_destroy(t_dongle **dongles, size_t count);

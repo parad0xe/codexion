@@ -6,15 +6,14 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 09:48:13 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 10:16:34 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 19:15:41 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dongle.h"
 #include <stdlib.h>
 
-void	dongle_managers_destroy(t_dongle_manager **managers,
-		size_t dongle_count)
+void	dongle_managers_destroy(t_dongle_manager **managers)
 {
 	if (*managers == NULL)
 		return ;

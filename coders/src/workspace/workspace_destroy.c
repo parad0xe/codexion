@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:10:12 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 18:13:34 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 19:25:38 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	workspace_destroy(t_workspace **workspace)
 	if (*workspace == NULL)
 		return ;
 	if ((*workspace)->coders != NULL)
-		coders_destroy(&(*workspace)->coders, (*workspace)->coder_count);
+		coders_destroy(&(*workspace)->coders);
 	if ((*workspace)->manager_pool != NULL)
 		dmp_destroy(&(*workspace)->manager_pool);
 	free(*workspace);

@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:03:12 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 17:19:08 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 19:25:53 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	_run_test(t_args *args, t_coder *coders,
 	custom_assert("assign correct manager [1]",
 		coders[1].dongle_manager == &pool->managers[1]);
 	custom_assert("set correct burnout time", coders[0].time_to_burnout == 100);
-	coders_destroy(&coders, args->number_of_coders);
+	coders_destroy(&coders);
 	custom_assert("return NULL if args is NULL", coders_create(NULL,
 			pool) == NULL);
 	custom_assert("return NULL if pool is NULL", coders_create(args,

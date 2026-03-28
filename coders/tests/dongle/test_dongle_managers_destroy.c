@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 11:01:45 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 11:57:31 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 19:24:25 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	main(void)
 
 	pthread_mutex_init(&mutex, NULL);
 	dongles = dongles_create(2, 10);
-	managers = dongle_managers_create(&mutex, dongles, 2, 10);
-	dongle_managers_destroy(&managers, 2);
+	managers = dongle_managers_create(&mutex, dongles, 2);
+	dongle_managers_destroy(&managers);
 	custom_assert("managers pointer set to null", managers == NULL);
-	dongle_managers_destroy(&managers, 2);
+	dongle_managers_destroy(&managers);
 	custom_assert("handle already null pointer", managers == NULL);
 	dongles_destroy(&dongles, 2);
 	pthread_mutex_destroy(&mutex);
