@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:49:16 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/25 14:07:36 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 16:58:58 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,23 @@
 
 typedef struct s_coder
 {
-	pthread_t	tid;
-	t_dongle	*left_dongle;
-	t_dongle	*right_dongle;
-}				t_coder;
+	pthread_t				tid;
+	t_dongle_manager		*dongle_manager;
+	size_t					time_to_burnout;
+	size_t					time_to_compile;
+	size_t					time_to_debug;
+	size_t					time_to_refactor;
+	size_t					number_of_compiles;
+}							t_coder;
 
-typedef struct s_coders
+typedef struct s_workspace
 {
-	t_coder		*coders;
-	t_dongle	*dongles;
-}				t_coders;
+	t_coder					*coders;
+	t_dongle_manager_pool	*manager_pool;
+}							t_workspace;
 
-int				coders_init(t_coders *coders, t_args *args);
-void			coders_destroy(t_coders *coders);
-void			*coder_routine(void *thread_args);
-int				coders_thread_start(t_coders *coders, t_args *args);
-int				coders_thread_join(t_coders *coders, t_args *args);
-void			debug_coders(t_coders *coders, t_args *args);
+t_coder						*coders_create(t_args *args,
+								t_dongle_manager_pool *pool);
+void						coders_destroy(t_coder **coders, size_t count);
 
 #endif

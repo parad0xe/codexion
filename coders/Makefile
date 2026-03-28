@@ -33,6 +33,8 @@ SRCS =\
 	  $(SRC_DIR)/dongle/dongle_managers_destroy.c\
 	  $(SRC_DIR)/dongle/dongle_manager_pool_create.c\
 	  $(SRC_DIR)/dongle/dongle_manager_pool_destroy.c\
+	  $(SRC_DIR)/coder/coders_create.c\
+	  $(SRC_DIR)/coder/coders_destroy.c\
 	  $(SRC_DIR)/utils/absmod.c\
 	  $(SRC_DIR)/main.c\
 
@@ -52,6 +54,8 @@ TESTS =\
 	   $(TEST_DIR)/dongle/test_dongle_managers_destroy.c\
 	   $(TEST_DIR)/dongle/test_dongle_manager_pool_create.c\
 	   $(TEST_DIR)/dongle/test_dongle_manager_pool_destroy.c\
+	   $(TEST_DIR)/coder/test_coders_create.c\
+	   $(TEST_DIR)/coder/test_coders_destroy.c\
 
 # main objects
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
