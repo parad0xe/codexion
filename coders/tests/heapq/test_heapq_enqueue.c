@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:56:20 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/27 18:32:51 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 09:11:13 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	main(void)
 	custom_assert("it should create a valid heap", h != NULL);
 	heapq_enqueue(h, (void *)10, 20);
 	custom_assert("it should have element with priority 20 at top",
-		h->queue[0]->data == (void *)10);
+		h->items[0]->data == (void *)10);
 	heapq_enqueue(h, (void *)30, 10);
 	custom_assert("it should move element with priority 10 to top",
-		h->queue[0]->data == (void *)30);
+		h->items[0]->data == (void *)30);
 	heapq_enqueue(h, (void *)20, 30);
 	custom_assert("it should keep element with priority 10 at top",
-		h->queue[0]->data == (void *)30);
+		h->items[0]->data == (void *)30);
 	heapq_destroy(&h);
 	print_test_ok();
 }

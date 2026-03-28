@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:52:00 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 09:05:29 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 09:10:02 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_heapq_data
 
 typedef struct s_heapq
 {
-	t_heapq_data	**queue;
+	t_heapq_data	**items;
 	int				capacity;
 	int				count;
 }					t_heapq;

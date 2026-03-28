@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 17:54:21 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 09:05:39 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 09:10:18 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ t_heapq	*heapq_create(void)
 		return (NULL);
 	heapq->count = 0;
 	heapq->capacity = 2;
-	heapq->queue = malloc(sizeof(t_heapq_data *) * heapq->capacity);
-	if (heapq->queue == NULL)
+	heapq->items = malloc(sizeof(t_heapq_data *) * heapq->capacity);
+	if (heapq->items == NULL)
 	{
 		heapq_destroy(&heapq);
 		return (NULL);
 	}
-	memset(heapq->queue, 0, sizeof(t_heapq_data *));
+	memset(heapq->items, 0, sizeof(t_heapq_data *));
 	return (heapq);
 }

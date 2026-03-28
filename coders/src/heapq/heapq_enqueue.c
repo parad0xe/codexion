@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:06:39 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 09:06:36 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 09:10:49 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static t_errcode	_heapq_more_space(t_heapq *heapq)
 		return (ERR_HEAPQ_MALLOC);
 	i = -1;
 	while (++i < heapq->count)
-		new_queue[i] = heapq->queue[i];
-	free(heapq->queue);
-	heapq->queue = new_queue;
+		new_queue[i] = heapq->items[i];
+	free(heapq->items);
+	heapq->items = new_queue;
 	heapq->capacity = new_capacity;
 	return (0);
 }
@@ -63,13 +63,13 @@ static void	_heapq_heapify_up(t_heapq *heapq)
 	i = heapq->count - 1;
 	while (i >= 0)
 	{
-		parent = heapq->queue[(i - 1) / 2];
-		current = heapq->queue[i];
+		parent = heapq->items[(i - 1) / 2];
+		current = heapq->items[i];
 		if (current->priority < parent->priority)
 		{
 			tmp = parent;
-			heapq->queue[(i - 1) / 2] = current;
-			heapq->queue[i] = tmp;
+			heapq->items[(i - 1) / 2] = current;
+			heapq->items[i] = tmp;
 			i = (i - 1) / 2;
 			continue ;
 		}
@@ -88,7 +88,7 @@ t_errcode	heapq_enqueue(t_heapq *heapq, void *data, int priority)
 	errcode = _heapq_ensure_has_capacity(heapq);
 	if (errcode != 0)
 		return (errcode);
-	heapq->queue[heapq->count] = heapq_data;
+	heapq->items[heapq->count] = heapq_data;
 	heapq->count += 1;
 	_heapq_heapify_up(heapq);
 	return (0);
