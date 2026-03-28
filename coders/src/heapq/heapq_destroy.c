@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 17:57:15 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/25 18:42:57 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 09:06:13 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	heapq_destroy(t_heapq **heapq)
 	if ((*heapq)->queue != NULL)
 	{
 		i = -1;
-		while (++i < (*heapq)->size)
+		while (++i < (*heapq)->count)
 			free((*heapq)->queue[i]);
 		free((*heapq)->queue);
 	}

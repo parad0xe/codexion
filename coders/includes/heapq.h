@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:52:00 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/25 19:37:22 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 09:05:29 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include "codexion.h"
 # include <stddef.h>
-
-# define ERR_HEAPQ_MALLOC 10
 
 typedef struct s_heapq_data
 {
@@ -28,7 +26,7 @@ typedef struct s_heapq
 {
 	t_heapq_data	**queue;
 	int				capacity;
-	int				size;
+	int				count;
 }					t_heapq;
 
 t_heapq				*heapq_create(void);

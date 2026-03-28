@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 19:13:38 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/25 19:53:02 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 09:06:07 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static void	_heapq_heapify_down(t_heapq *heapq)
 	int	current_idx;
 	int	swap_success;
 
-	if (heapq->size > 1)
+	if (heapq->count > 1)
 	{
-		heapq->queue[0] = heapq->queue[heapq->size - 1];
-		heapq->queue[heapq->size - 1] = NULL;
-		heapq->size -= 1;
+		heapq->queue[0] = heapq->queue[heapq->count - 1];
+		heapq->queue[heapq->count - 1] = NULL;
+		heapq->count -= 1;
 		current_idx = 0;
-		while (current_idx * 2 + 2 < heapq->size)
+		while (current_idx * 2 + 2 < heapq->count)
 		{
 			swap_success = _heapq_heapify_down_try_swap(heapq, &current_idx);
 			if (swap_success == 0)
@@ -53,7 +53,7 @@ static void	_heapq_heapify_down(t_heapq *heapq)
 		}
 	}
 	else
-		heapq->size -= 1;
+		heapq->count -= 1;
 }
 
 void	*heapq_dequeue(t_heapq *heapq)
@@ -61,7 +61,7 @@ void	*heapq_dequeue(t_heapq *heapq)
 	t_heapq_data	*heapq_data;
 	void			*data;
 
-	if (heapq->size == 0)
+	if (heapq->count == 0)
 		return (NULL);
 	heapq_data = heapq->queue[0];
 	_heapq_heapify_down(heapq);

@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 19:04:55 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/25 20:05:43 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 09:05:53 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	_heapq_print_tree(t_heapq *heapq, int index, int depth)
 	int	left_idx;
 	int	right_idx;
 
-	if (index >= heapq->size)
+	if (index >= heapq->count)
 		return ;
 	left_idx = 2 * index + 1;
 	right_idx = 2 * index + 2;
@@ -36,7 +36,7 @@ void	heapq_debug(t_heapq *heapq)
 {
 	if (!heapq)
 		return ;
-	printf("\nSize: %d / Cap: %d\n", heapq->size, heapq->capacity);
+	printf("\nSize: %d / Cap: %d\n", heapq->count, heapq->capacity);
 	printf("--- Visual Tree ---\n");
 	_heapq_print_tree(heapq, 0, 0);
 	printf("-------------------\n");

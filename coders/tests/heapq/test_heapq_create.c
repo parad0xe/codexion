@@ -6,14 +6,12 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:53:05 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/25 22:39:43 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 09:06:52 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heapq.h"
 #include "test.h"
-#include <assert.h>
-#include <stdio.h>
 
 int	main(void)
 {
@@ -24,7 +22,7 @@ int	main(void)
 	custom_assert("it should create a valid heap", heap != NULL);
 	custom_assert("it should initialize the internal queue",
 		heap->queue != NULL);
-	custom_assert("it should start with size 0", heap->size == 0);
+	custom_assert("it should start with count 0", heap->count == 0);
 	custom_assert("it should start with capacity 2", heap->capacity == 2);
 	heapq_destroy(&heap);
 	custom_assert("it should set heap to NULL after destroy", heap == NULL);

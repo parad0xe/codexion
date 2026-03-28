@@ -6,14 +6,12 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:57:56 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/25 22:46:58 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/27 18:32:59 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heapq.h"
 #include "test.h"
-#include <assert.h>
-#include <stdio.h>
 
 int	main(void)
 {
