@@ -26,6 +26,7 @@ SRCS =\
 	  $(SRC_DIR)/heapq/heapq_enqueue.c\
 	  $(SRC_DIR)/heapq/heapq_dequeue.c\
 	  $(SRC_DIR)/heapq/heapq_debug.c\
+	  $(SRC_DIR)/heapq/heapq_peek.c\
 	  $(SRC_DIR)/dongle/dongles_create.c\
 	  $(SRC_DIR)/dongle/dongles_destroy.c\
 	  $(SRC_DIR)/dongle/dongle_managers_create.c\
@@ -35,6 +36,7 @@ SRCS =\
 	  $(SRC_DIR)/utils/absmod.c\
 	  $(SRC_DIR)/main.c\
 
+TEST_VERBOSE ?= 0
 TEST_SRCS =\
 		   $(TEST_DIR)/_core/test_utils.c
 
@@ -43,6 +45,7 @@ TESTS =\
 	   $(TEST_DIR)/heapq/test_heapq_enqueue.c\
 	   $(TEST_DIR)/heapq/test_heapq_dequeue.c\
 	   $(TEST_DIR)/heapq/test_heapq_destroy.c\
+	   $(TEST_DIR)/heapq/test_heapq_peek.c\
 	   $(TEST_DIR)/dongle/test_dongles_create.c\
 	   $(TEST_DIR)/dongle/test_dongles_destroy.c\
 	   $(TEST_DIR)/dongle/test_dongle_managers_create.c\
@@ -116,11 +119,15 @@ tests-run: $(TEST_BINS)
 	for test in $(TEST_BINS); do \
 		name=$$(basename $$test .bin); \
 		printf "\033[1;36m▶ running test:\033[0m \033[1;35m$$name\033[0m\n"; \
-		./$$test; \
-		if [ $$? -eq 0 ]; then \
+		out=$$(./$$test); \
+		res=$$(echo $$?); \
+		if [ "$(TEST_VERBOSE)" = "1" ]; then \
+			printf "%s\n" "$$out"; \
+		fi; \
+		if [ $$res -eq 0 ]; then \
 			printf "\033[1;32m✔ success\033[0m\n\n"; \
 		else \
-			printf "\033[1;31m✖ failed in $$name\033[0m\n\n"; \
+			printf "\033[1;31m✖ failure in $$name\033[0m\n\n"; \
 			failed=1; \
 		fi; \
 	done; \

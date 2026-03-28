@@ -6,21 +6,23 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 18:35:18 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 11:42:44 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 16:17:03 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dongle.h"
 #include "test.h"
 #include <stddef.h>
+#include <stdio.h>
 
 static void	_test_dongles(t_dongle *dongles, size_t size, int cooldown)
 {
 	int	i;
 
 	i = -1;
-	while (i < size)
+	while (++i < size)
 	{
+		print_test_loop_name("test dongle", i);
 		custom_assert("it should create a valid array of dongles",
 			dongles != NULL);
 		custom_assert("it should initialize the correct cooldown",
