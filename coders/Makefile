@@ -1,6 +1,6 @@
 # structure
 NAME = codexion
-ARGS = 
+ARGS ?= 
 
 # directories
 SRC_DIR = src
@@ -74,29 +74,41 @@ TEST_OBJS = $(TESTS:%.c=$(BUILD_DIR)/%.o)
 TEST_BINS = $(TESTS:%.c=$(BUILD_DIR)/%.bin)
 TEST_DEPS = $(TEST_OBJS:.o=.d)
 
+define switch_build_mode
+	@if [ -f $(BUILD_DIR)/.flag_$(1) ]; then \
+		printf "\033[1;33m⚠ Switching build mode. Cleaning up...\033[0m\n"; \
+		rm -rf $(BUILD_DIR); \
+	fi
+	@mkdir -p $(BUILD_DIR)
+	@touch $(BUILD_DIR)/.flag_$(2)
+endef
+
 # rules
 ifeq ($(MAKELEVEL),0)
 
 all $(NAME) &:
+	$(call switch_build_mode,debug,prod)
 	@$(MAKE) $(NAME) \
 		CFLAGS="$(CFLAGS) -Wall -Wextra -Werror" \
 		--no-print-directory
 
 check: all
-	$(VALGRIND) ./$(NAME)
+	$(VALGRIND) ./$(NAME) $(ARGS)
 
 build-debug:
+	$(call switch_build_mode,prod,debug)
 	@$(MAKE) $(NAME) \
-		CFLAGS="$(CFLAGS) -g3 -fsanitize=address" \
+		CFLAGS="$(CFLAGS) -g3" \
 		--no-print-directory
 
 debug: build-debug
-	./$(NAME)
+	./$(NAME) $(ARGS)
 
 check-debug: build-debug
-	$(VALGRIND) ./$(NAME)
+	$(VALGRIND) ./$(NAME) $(ARGS)
 
 tests:
+	$(call switch_build_mode,prod,debug)
 	@$(MAKE) tests-run \
 		CFLAGS="$(CFLAGS) -g3" \
 		SRCS="$(SRCS) $(TEST_SRCS)" \
@@ -104,6 +116,7 @@ tests:
 		--no-print-directory
 
 check-tests:
+	$(call switch_build_mode,prod,debug)
 	@$(MAKE) check-tests-run \
 		CFLAGS="$(CFLAGS) -g3" \
 		SRCS="$(SRCS) $(TEST_SRCS)" \
@@ -168,10 +181,10 @@ check-tests-run: $(TEST_BINS)
 	fi
 
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 $(BUILD_DIR)/%.o: %.c
-	mkdir -p $(dir $@)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.o $(CORE_OBJS)
@@ -179,6 +192,7 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.o $(CORE_OBJS)
 
 .PHONY: tests-run check-tests-run
 
+.PRECIOUS: $(BUILD_DIR)/%.o
 endif
 
 -include $(DEPS) $(TEST_DEPS)
