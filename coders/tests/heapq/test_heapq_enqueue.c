@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:56:20 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 11:42:34 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 18:01:14 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 int	main(void)
 {
-	t_heapq	*h;
+	t_heapq	*heapq;
 
-	h = heapq_create();
-	custom_assert("it should create a valid heap", h != NULL);
-	heapq_enqueue(h, (void *)10, 20);
+	heapq = heapq_create();
+	custom_assert("it should create a valid heapq", heapq != NULL);
+	heapq_enqueue(heapq, (void *)10, 20);
 	custom_assert("it should have element with priority 20 at top",
-		h->items[0]->data == (void *)10);
-	heapq_enqueue(h, (void *)30, 10);
+		heapq->items[0]->data == (void *)10);
+	heapq_enqueue(heapq, (void *)30, 10);
 	custom_assert("it should move element with priority 10 to top",
-		h->items[0]->data == (void *)30);
-	heapq_enqueue(h, (void *)20, 30);
+		heapq->items[0]->data == (void *)30);
+	heapq_enqueue(heapq, (void *)20, 30);
 	custom_assert("it should keep element with priority 10 at top",
-		h->items[0]->data == (void *)30);
-	heapq_destroy(&h);
+		heapq->items[0]->data == (void *)30);
+	heapq_destroy(&heapq);
 }

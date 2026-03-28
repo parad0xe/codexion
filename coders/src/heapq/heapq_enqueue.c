@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:06:39 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 09:10:49 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 17:59:38 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 static t_heapq_data	*_heapq_create_data(void *data, int priority)
 {
-	t_heapq_data	*heaq_data;
+	t_heapq_data	*heapq_data;
 
-	heaq_data = malloc(sizeof(t_heapq_data));
-	if (heaq_data == NULL)
+	heapq_data = malloc(sizeof(t_heapq_data));
+	if (heapq_data == NULL)
 		return (NULL);
-	heaq_data->data = data;
-	heaq_data->priority = priority;
-	return (heaq_data);
+	heapq_data->data = data;
+	heapq_data->priority = priority;
+	return (heapq_data);
 }
 
 static t_errcode	_heapq_more_space(t_heapq *heapq)

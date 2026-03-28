@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 19:04:55 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 09:10:26 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 17:58:01 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
 static void	_heapq_print_tree(t_heapq *heapq, int index, int depth)
 {
 	int	indent;
-	int	left_idx;
-	int	right_idx;
+	int	left_index;
+	int	right_index;
 
 	if (index >= heapq->count)
 		return ;
-	left_idx = 2 * index + 1;
-	right_idx = 2 * index + 2;
-	_heapq_print_tree(heapq, right_idx, depth + 1);
+	left_index = 2 * index + 1;
+	right_index = 2 * index + 2;
+	_heapq_print_tree(heapq, right_index, depth + 1);
 	indent = 0;
 	while (indent++ < depth)
 		printf("        ");
 	printf("- [%d] prio(%d) p(%p)\n", index, heapq->items[index]->priority,
 		heapq->items[index]->data);
-	_heapq_print_tree(heapq, left_idx, depth + 1);
+	_heapq_print_tree(heapq, left_index, depth + 1);
 }
 
 void	heapq_debug(t_heapq *heapq)
