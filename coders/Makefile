@@ -17,19 +17,22 @@ INCLUDES = -I $(INCLUDE_DIR)
 # tools
 VALGRIND = valgrind --leak-check=full \
 		   --show-leak-kinds=all \
-		   --track-origins=yes
+		   --track-origins=yes -s --error-exitcode=1
 
 # files
 SRCS =\
-	  $(SRC_DIR)/coders.c\
-	  $(SRC_DIR)/monitor.c\
-	  $(SRC_DIR)/dongle.c\
-	  $(SRC_DIR)/utils.c\
 	  $(SRC_DIR)/heapq/heapq_create.c\
 	  $(SRC_DIR)/heapq/heapq_destroy.c\
 	  $(SRC_DIR)/heapq/heapq_enqueue.c\
 	  $(SRC_DIR)/heapq/heapq_dequeue.c\
 	  $(SRC_DIR)/heapq/heapq_debug.c\
+	  $(SRC_DIR)/dongle/dongles_create.c\
+	  $(SRC_DIR)/dongle/dongles_destroy.c\
+	  $(SRC_DIR)/dongle/dongle_managers_create.c\
+	  $(SRC_DIR)/dongle/dongle_managers_destroy.c\
+	  $(SRC_DIR)/dongle/dongle_manager_pool_create.c\
+	  $(SRC_DIR)/dongle/dongle_manager_pool_destroy.c\
+	  $(SRC_DIR)/utils/absmod.c\
 	  $(SRC_DIR)/main.c\
 
 TEST_SRCS =\
@@ -40,6 +43,12 @@ TESTS =\
 	   $(TEST_DIR)/heapq/test_heapq_enqueue.c\
 	   $(TEST_DIR)/heapq/test_heapq_dequeue.c\
 	   $(TEST_DIR)/heapq/test_heapq_destroy.c\
+	   $(TEST_DIR)/dongle/test_dongles_create.c\
+	   $(TEST_DIR)/dongle/test_dongles_destroy.c\
+	   $(TEST_DIR)/dongle/test_dongle_managers_create.c\
+	   $(TEST_DIR)/dongle/test_dongle_managers_destroy.c\
+	   $(TEST_DIR)/dongle/test_dongle_manager_pool_create.c\
+	   $(TEST_DIR)/dongle/test_dongle_manager_pool_destroy.c\
 
 # main objects
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
@@ -67,7 +76,7 @@ check: all
 
 build-debug:
 	@$(MAKE) $(NAME) \
-		CFLAGS="$(CFLAGS) -g3" \
+		CFLAGS="$(CFLAGS) -g3 -fsanitize=address" \
 		--no-print-directory
 
 debug: build-debug
@@ -103,20 +112,45 @@ re: fclean all
 else
 
 tests-run: $(TEST_BINS)
-	@for test in $(TEST_BINS); do \
+	@failed=0; \
+	for test in $(TEST_BINS); do \
 		name=$$(basename $$test .bin); \
-		printf "\033[1;34m▶ running test:\033[0m \033[1;37m$$name\033[0m\n"; \
-		./$$test || exit 1; \
-		printf "\033[1;32m✔ success\033[0m\n\n"; \
-	done
+		printf "\033[1;36m▶ running test:\033[0m \033[1;35m$$name\033[0m\n"; \
+		./$$test; \
+		if [ $$? -eq 0 ]; then \
+			printf "\033[1;32m✔ success\033[0m\n\n"; \
+		else \
+			printf "\033[1;31m✖ failed in $$name\033[0m\n\n"; \
+			failed=1; \
+		fi; \
+	done; \
+	if [ $$failed -eq 0 ]; then \
+		printf "\033[1;32m✔ all tests passed successfully\033[0m\n"; \
+	else \
+		printf "\033[1;31m✖ some tests failed\033[0m\n"; \
+		exit 1; \
+	fi
 
 check-tests-run: $(TEST_BINS)
-	@for test in $(TEST_BINS); do \
+	@failed=0; \
+	for test in $(TEST_BINS); do \
 		name=$$(basename $$test .bin); \
-		printf "\033[1;33m▶ checking memory:\033[0m \033[1;37m$$name\033[0m\n"; \
-		$(VALGRIND) ./$$test || exit 1; \
-		printf "\033[1;32m✔ memory ok\033[0m\n\n"; \
-	done
+		printf "\033[1;36m▶ checking memory:\033[0m \033[1;35m$$name\033[0m\n"; \
+		out=$$($(VALGRIND) ./$$test 2>&1 >/dev/null); \
+		if [ $$? -eq 0 ]; then \
+			printf "\033[1;32m✔ memory ok\033[0m\n\n"; \
+		else \
+			printf "\033[0;33m%s\033[0m\n" "$$out"; \
+			printf "\033[1;31m✖ memory error in $$name\033[0m\n\n"; \
+			failed=1; \
+		fi; \
+	done; \
+	if [ $$failed -eq 0 ]; then \
+		printf "\033[1;32m✔ all memory checks passed\033[0m\n"; \
+	else \
+		printf "\033[1;31m✖ some memory checks failed\033[0m\n"; \
+		exit 1; \
+	fi
 
 $(NAME): $(OBJS)
 	$(CC) -o $(NAME) $(OBJS)

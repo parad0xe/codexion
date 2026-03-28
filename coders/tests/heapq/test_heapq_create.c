@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:53:05 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 09:11:01 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 11:42:33 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	main(void)
 {
 	t_heapq	*heap;
 
-	print_test_start("heapq create");
 	heap = heapq_create();
 	custom_assert("it should create a valid heap", heap != NULL);
 	custom_assert("it should initialize the internal items",
@@ -26,6 +25,5 @@ int	main(void)
 	custom_assert("it should start with capacity 2", heap->capacity == 2);
 	heapq_destroy(&heap);
 	custom_assert("it should set heap to NULL after destroy", heap == NULL);
-	print_test_ok();
 	return (0);
 }

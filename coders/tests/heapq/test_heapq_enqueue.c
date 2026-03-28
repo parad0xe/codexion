@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 20:56:20 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 09:11:13 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/28 11:42:34 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	main(void)
 {
 	t_heapq	*h;
 
-	print_test_start("heapq enqueue");
 	h = heapq_create();
 	custom_assert("it should create a valid heap", h != NULL);
 	heapq_enqueue(h, (void *)10, 20);
@@ -30,5 +29,4 @@ int	main(void)
 	custom_assert("it should keep element with priority 10 at top",
 		h->items[0]->data == (void *)30);
 	heapq_destroy(&h);
-	print_test_ok();
 }
