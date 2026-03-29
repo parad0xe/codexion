@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_dongle_manager_pool_destroy.c                 :+:      :+:    :+:   */
+/*   coder_has_burnout.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/28 11:05:18 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 11:42:43 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/29 22:12:39 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/29 23:24:24 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dongle.h"
-#include "test.h"
+#include "coders.h"
+#include "utils.h"
 
-int	main(void)
+int	coder_has_burnout(t_coder *coder)
 {
-	t_dongle_manager_pool	*pool;
+	int	has_burnout;
 
-	pool = dmp_create(3, 10);
-	custom_assert("create valid pool", pool != NULL);
-	dmp_destroy(&pool);
-	custom_assert("pool pointer set to null", pool == NULL);
-	dmp_destroy(&pool);
-	custom_assert("handle double destroy safely", pool == NULL);
-	return (0);
+	has_burnout = get_current_timestamp() >= coder->last_compile_start
+		+ coder->time_to_burnout;
+	return (has_burnout);
 }

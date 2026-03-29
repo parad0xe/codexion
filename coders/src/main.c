@@ -6,13 +6,16 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:03:21 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 19:26:54 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 01:16:18 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "coders.h"
 #include "codexion.h"
 #include "workspace.h"
+#include <pthread.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -32,13 +35,13 @@ void	debug_args(t_args args)
 
 int	parse_args(t_args *args)
 {
-	args->number_of_coders = 4;
-	args->time_to_burnout = 4000;
-	args->time_to_compile = 400;
-	args->time_to_debug = 400;
-	args->time_to_refactor = 400;
-	args->number_of_compiles = 3;
-	args->dongle_cooldown = 60;
+	args->number_of_coders = 5;
+	args->time_to_burnout = 184;
+	args->time_to_compile = 50;
+	args->time_to_debug = 30;
+	args->time_to_refactor = 20;
+	args->number_of_compiles = 50;
+	args->dongle_cooldown = 10;
 	args->scheduler = "fifo";
 	return (0);
 }
@@ -67,6 +70,8 @@ int	main(int argc, char **argv)
 	workspace = workspace_create(&args);
 	if (workspace == NULL)
 		return (stop(workspace, ERR_WORKSPACE_MALLOC));
+	workspace_start(workspace);
+	workspace_join(workspace);
 	printf("normally terminated\n");
 	return (stop(workspace, 0));
 }

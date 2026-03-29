@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dongle_manager_pool_destroy.c                      :+:      :+:    :+:   */
+/*   dongle_get_ready_timestamp.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/28 10:03:39 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 19:16:14 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/29 22:48:48 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/29 22:49:33 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dongle.h"
-#include <pthread.h>
-#include <stdlib.h>
 
-void	dmp_destroy(t_dongle_manager_pool **pool)
+size_t	dongle_get_ready_timestamp(t_dongle *dongle)
 {
-	if (*pool == NULL)
-		return ;
-	pthread_mutex_destroy(&(*pool)->shared_mutex);
-	dongle_managers_destroy(&(*pool)->managers);
-	dongles_destroy(&(*pool)->dongles, (*pool)->count);
-	free(*pool);
-	*pool = NULL;
+	return (dongle->last_usage + dongle->cooldown);
 }

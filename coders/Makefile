@@ -29,15 +29,21 @@ SRCS =\
 	  $(SRC_DIR)/heapq/heapq_peek.c\
 	  $(SRC_DIR)/dongle/dongles_create.c\
 	  $(SRC_DIR)/dongle/dongles_destroy.c\
-	  $(SRC_DIR)/dongle/dongle_managers_create.c\
-	  $(SRC_DIR)/dongle/dongle_managers_destroy.c\
-	  $(SRC_DIR)/dongle/dongle_manager_pool_create.c\
-	  $(SRC_DIR)/dongle/dongle_manager_pool_destroy.c\
+	  $(SRC_DIR)/dongle/dongle_get_ready_timestamp.c\
 	  $(SRC_DIR)/coder/coders_create.c\
 	  $(SRC_DIR)/coder/coders_destroy.c\
+	  $(SRC_DIR)/coder/coder_wait_dongles.c\
+	  $(SRC_DIR)/coder/coder_release_dongles.c\
+	  $(SRC_DIR)/coder/coder_has_burnout.c\
+	  $(SRC_DIR)/coder/coder_get_priority.c\
+	  $(SRC_DIR)/coder/coder_routine.c\
 	  $(SRC_DIR)/workspace/workspace_create.c\
 	  $(SRC_DIR)/workspace/workspace_destroy.c\
+	  $(SRC_DIR)/workspace/workspace_start.c\
+	  $(SRC_DIR)/workspace/workspace_join.c\
 	  $(SRC_DIR)/utils/absmod.c\
+	  $(SRC_DIR)/utils/get_current_timestamp.c\
+	  $(SRC_DIR)/utils/set_absolute_timeout.c\
 	  $(SRC_DIR)/main.c\
 
 TEST_VERBOSE ?= 0
@@ -52,10 +58,6 @@ TESTS =\
 	   $(TEST_DIR)/heapq/test_heapq_peek.c\
 	   $(TEST_DIR)/dongle/test_dongles_create.c\
 	   $(TEST_DIR)/dongle/test_dongles_destroy.c\
-	   $(TEST_DIR)/dongle/test_dongle_managers_create.c\
-	   $(TEST_DIR)/dongle/test_dongle_managers_destroy.c\
-	   $(TEST_DIR)/dongle/test_dongle_manager_pool_create.c\
-	   $(TEST_DIR)/dongle/test_dongle_manager_pool_destroy.c\
 	   $(TEST_DIR)/coder/test_coders_create.c\
 	   $(TEST_DIR)/coder/test_coders_destroy.c\
 	   $(TEST_DIR)/workspace/test_workspace_create.c\

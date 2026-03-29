@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_dongle_manager_pool_create.c                  :+:      :+:    :+:   */
+/*   get_current_timestamp.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/28 11:02:41 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 11:42:43 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/29 13:57:13 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/29 14:01:35 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dongle.h"
-#include "test.h"
+#include <stddef.h>
+#include <sys/time.h>
 
-int	main(void)
+size_t	get_current_timestamp(void)
 {
-	t_dongle_manager_pool	*pool;
+	struct timeval	tv;
 
-	pool = dmp_create(4, 15);
-	custom_assert("create valid pool", pool != NULL);
-	custom_assert("set correct count", pool->count == 4);
-	custom_assert("create dongles array", pool->dongles != NULL);
-	custom_assert("create managers array", pool->managers != NULL);
-	dmp_destroy(&pool);
-	return (0);
+	gettimeofday(&tv, NULL);
+	return ((size_t)tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }

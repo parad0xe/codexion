@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:50:04 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 19:23:40 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/29 22:50:12 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,19 @@
 
 typedef struct s_dongle
 {
-	int					is_available;
-	int					cooldown;
-	int					last_usage;
-	t_heapq				*queue;
-}						t_dongle;
+	int				is_available;
+	size_t			cooldown;
+	size_t			last_usage;
+	t_heapq			*queue;
+	pthread_cond_t	access_cond;
+	int				access_cond_init;
+	pthread_mutex_t	access_mutex;
+	int				access_mutex_init;
+}					t_dongle;
 
-// demander l'access au manager
-// le manager lock le shared mutex
-// le manager check pour chaque dongle (left / right):
-// - si la liste d'attente du dongle est vide
-// - si le dongle est disponible
-// - si le dongle est utilisable
-typedef struct s_dongle_manager
-{
-	pthread_mutex_t		*shared_mutex;
-	t_dongle			*left_dongle;
-	t_dongle			*right_dongle;
-}						t_dongle_manager;
+t_dongle			*dongles_create(size_t count, int dongle_cooldown);
+void				dongles_destroy(t_dongle **dongles, size_t count);
 
-typedef struct s_dongle_manager_pool
-{
-	pthread_mutex_t		shared_mutex;
-	t_dongle_manager	*managers;
-	t_dongle			*dongles;
-	size_t				count;
-}						t_dongle_manager_pool;
-
-t_dongle_manager_pool	*dmp_create(size_t dongle_count, int cooldown);
-void					dmp_destroy(t_dongle_manager_pool **pool);
-
-t_dongle_manager		*dongle_managers_create(pthread_mutex_t *mutex,
-							t_dongle *dongles, size_t dongle_count);
-void					dongle_managers_destroy(t_dongle_manager **managers);
-
-t_dongle				*dongles_create(size_t count, int dongle_cooldown);
-void					dongles_destroy(t_dongle **dongles, size_t count);
+size_t				dongle_get_ready_timestamp(t_dongle *dongle);
 
 #endif

@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dongle_managers_destroy.c                          :+:      :+:    :+:   */
+/*   coder_get_priority.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/28 09:48:13 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 19:15:41 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/30 00:12:50 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/30 00:30:14 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dongle.h"
-#include <stdlib.h>
+#include "coders.h"
+#include <stddef.h>
+#include <string.h>
 
-void	dongle_managers_destroy(t_dongle_manager **managers)
+size_t	coder_get_priority(t_coder *coder)
 {
-	if (*managers == NULL)
-		return ;
-	free(*managers);
-	*managers = NULL;
+	size_t	priority;
+
+	priority = 0;
+	if (strcmp(coder->scheduler, "edf") == 0)
+		priority = coder->last_compile_start + coder->time_to_burnout;
+	return (priority);
 }

@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heapq_peek.c                                       :+:      :+:    :+:   */
+/*   set_absolute_timeout.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/28 15:59:39 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/29 20:21:33 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/29 14:07:03 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/29 14:12:07 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "heapq.h"
+#include <sys/time.h>
+#include <time.h>
 
-t_heapq_data	*heapq_peek(t_heapq *heapq)
+void	set_absolute_timeout(struct timespec *ts, size_t timeout)
 {
-	if (heapq == NULL || heapq->count == 0)
-		return (NULL);
-	return (heapq->items[0]);
+	struct timeval	tv;
+	long			usec_total;
+
+	gettimeofday(&tv, NULL);
+	ts->tv_sec = tv.tv_sec + (timeout / 1000);
+	usec_total = tv.tv_usec + ((timeout % 1000) * 1000);
+	if (usec_total >= 1000000)
+	{
+		ts->tv_sec++;
+		usec_total -= 1000000;
+	}
+	ts->tv_nsec = usec_total * 1000;
 }

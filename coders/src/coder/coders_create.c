@@ -6,35 +6,50 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 16:45:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 19:20:31 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 01:01:33 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "coders.h"
 #include "dongle.h"
+#include "utils.h"
 #include <stdlib.h>
 
-t_coder	*coders_create(t_args *args, t_dongle_manager_pool *pool)
+static void	_coder_init(t_coder *coder, int id, t_dongle *dongles, t_args *args)
+{
+	coder->id = id;
+	coder->time_to_burnout = args->time_to_burnout;
+	coder->time_to_compile = args->time_to_compile;
+	coder->time_to_debug = args->time_to_debug;
+	coder->time_to_refactor = args->time_to_refactor;
+	coder->number_of_compiles = args->number_of_compiles;
+	coder->scheduler = args->scheduler;
+	coder->left_dongle = &dongles[id];
+	coder->right_dongle = NULL;
+	if (args->number_of_coders > 1)
+		coder->right_dongle = &dongles[absmod(id - 1, args->number_of_coders)];
+	set_absolute_timeout(&coder->burnout_at, args->time_to_burnout);
+}
+
+t_coder	*coders_create(t_args *args, t_dongle *dongles,
+		pthread_mutex_t *start_mutex)
 {
 	t_coder	*coders;
 	size_t	i;
+	size_t	current_timestamp;
 
-	if (args == NULL || pool == NULL)
-		return (NULL);
-	if (args->number_of_coders != pool->count)
+	if (args == NULL || dongles == NULL)
 		return (NULL);
 	coders = malloc(sizeof(t_coder) * args->number_of_coders);
 	if (coders == NULL)
 		return (NULL);
 	i = 0;
+	current_timestamp = get_current_timestamp();
 	while (i < args->number_of_coders)
 	{
-		coders[i].dongle_manager = &pool->managers[i];
-		coders[i].time_to_burnout = args->time_to_burnout;
-		coders[i].time_to_compile = args->time_to_compile;
-		coders[i].time_to_debug = args->time_to_debug;
-		coders[i].time_to_refactor = args->time_to_refactor;
-		coders[i].number_of_compiles = args->number_of_compiles;
+		_coder_init(&coders[i], i, dongles, args);
+		coders[i].last_compile_start = current_timestamp;
+		coders[i].start_mutex = start_mutex;
 		i++;
 	}
 	return (coders);

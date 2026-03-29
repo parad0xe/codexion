@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:52:00 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 09:10:02 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/29 23:30:31 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 typedef struct s_heapq_data
 {
 	void			*data;
-	int				priority;
+	size_t			priority;
 }					t_heapq_data;
 
 typedef struct s_heapq
@@ -30,9 +30,9 @@ typedef struct s_heapq
 }					t_heapq;
 
 t_heapq				*heapq_create(void);
-t_errcode			heapq_enqueue(t_heapq *heapq, void *data, int priority);
+t_errcode			heapq_enqueue(t_heapq *heapq, void *data, size_t priority);
 void				*heapq_dequeue(t_heapq *heapq);
-void				*heapq_peek(t_heapq *heapq);
+t_heapq_data		*heapq_peek(t_heapq *heapq);
 void				heapq_destroy(t_heapq **heapq);
 void				heapq_debug(t_heapq *heapq);
 

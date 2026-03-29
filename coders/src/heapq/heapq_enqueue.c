@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:06:39 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 17:59:38 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/29 23:31:03 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static t_heapq_data	*_heapq_create_data(void *data, int priority)
+static t_heapq_data	*_heapq_create_data(void *data, size_t priority)
 {
 	t_heapq_data	*heapq_data;
 
@@ -77,7 +77,7 @@ static void	_heapq_heapify_up(t_heapq *heapq)
 	}
 }
 
-t_errcode	heapq_enqueue(t_heapq *heapq, void *data, int priority)
+t_errcode	heapq_enqueue(t_heapq *heapq, void *data, size_t priority)
 {
 	int				errcode;
 	t_heapq_data	*heapq_data;
