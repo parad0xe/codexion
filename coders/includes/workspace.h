@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:04:44 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 01:15:26 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 01:35:42 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_workspace
 t_workspace			*workspace_create(t_args *args);
 void				workspace_destroy(t_workspace **workspace);
 
-void	workspace_start(t_workspace *workspace);
-void	workspace_join(t_workspace *workspace);
+void				workspace_start(t_workspace *workspace);
+void				workspace_join(t_workspace *workspace);
 
 #endif
