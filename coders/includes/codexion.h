@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 10:35:30 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 19:22:41 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/29 13:36:50 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define ERR_THREAD_CREATE 2
 # define ERR_THREAD_JOIN 3
 # define ERR_MUTEX_INIT 4
+# define ERR_COND_INIT 5
 
 // heapq errors
 # define ERR_HEAPQ_MALLOC 10
