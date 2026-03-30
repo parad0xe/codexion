@@ -6,16 +6,14 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:03:21 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 01:16:18 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 11:45:39 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coders.h"
 #include "codexion.h"
 #include "workspace.h"
 #include <pthread.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 

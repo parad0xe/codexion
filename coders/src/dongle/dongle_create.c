@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dongles_create.c                                   :+:      :+:    :+:   */
+/*   dongle_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 20:00:30 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/29 21:09:44 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 11:43:27 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_errcode	_dongle_init(t_dongle *dongle, int cooldown)
 	return (0);
 }
 
-t_dongle	*dongles_create(size_t count, int cooldown)
+t_dongle	*dongle_create(size_t count, int cooldown)
 {
 	t_dongle	*dongles;
 	size_t		i;
@@ -54,7 +54,7 @@ t_dongle	*dongles_create(size_t count, int cooldown)
 		errcode = _dongle_init(&dongles[i], cooldown);
 		if (errcode != 0)
 		{
-			dongles_destroy(&dongles, i);
+			dongle_destroy(&dongles, i);
 			return (NULL);
 		}
 		i++;

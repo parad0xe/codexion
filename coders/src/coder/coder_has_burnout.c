@@ -6,11 +6,11 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 22:12:39 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/29 23:24:24 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 11:44:00 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coders.h"
+#include "coder.h"
 #include "utils.h"
 
 int	coder_has_burnout(t_coder *coder)

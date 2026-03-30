@@ -6,11 +6,11 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 00:45:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 01:11:33 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 11:44:08 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coders.h"
+#include "coder.h"
 #include "utils.h"
 #include <pthread.h>
 #include <stdio.h>

@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_dongles_destroy.c                             :+:      :+:    :+:   */
+/*   test_coder_destroy.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/27 18:41:10 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 11:42:44 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/28 17:16:40 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/30 11:46:49 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dongle.h"
+#include "coder.h"
 #include "test.h"
+#include <stdlib.h>
 
 int	main(void)
 {
-	t_dongle	*dongles;
-	size_t		size;
+	t_coder	*coders;
 
-	size = 5;
-	dongles = dongles_create(size, 10);
-	custom_assert("it should create a valid array of dongles", dongles != NULL);
-	dongles_destroy(&dongles, size);
-	custom_assert("it should set the dongles pointer to NULL after destroy",
-		dongles == NULL);
-	dongles_destroy(&dongles, size);
-	custom_assert("it should safely handle destroying an already NULL pointer",
-		dongles == NULL);
+	coders = malloc(sizeof(t_coder) * 2);
+	custom_assert("allocate coders manually", coders != NULL);
+	coder_destroy(&coders);
+	custom_assert("set pointer to NULL after destroy", coders == NULL);
+	coder_destroy(&coders);
+	custom_assert("safely handle already NULL pointer", coders == NULL);
 	return (0);
 }

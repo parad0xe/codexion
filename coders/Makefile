@@ -27,11 +27,11 @@ SRCS =\
 	  $(SRC_DIR)/heapq/heapq_dequeue.c\
 	  $(SRC_DIR)/heapq/heapq_debug.c\
 	  $(SRC_DIR)/heapq/heapq_peek.c\
-	  $(SRC_DIR)/dongle/dongles_create.c\
-	  $(SRC_DIR)/dongle/dongles_destroy.c\
+	  $(SRC_DIR)/dongle/dongle_create.c\
+	  $(SRC_DIR)/dongle/dongle_destroy.c\
 	  $(SRC_DIR)/dongle/dongle_get_ready_timestamp.c\
-	  $(SRC_DIR)/coder/coders_create.c\
-	  $(SRC_DIR)/coder/coders_destroy.c\
+	  $(SRC_DIR)/coder/coder_create.c\
+	  $(SRC_DIR)/coder/coder_destroy.c\
 	  $(SRC_DIR)/coder/coder_wait_dongles.c\
 	  $(SRC_DIR)/coder/coder_release_dongles.c\
 	  $(SRC_DIR)/coder/coder_has_burnout.c\
@@ -56,10 +56,10 @@ TESTS =\
 	   $(TEST_DIR)/heapq/test_heapq_dequeue.c\
 	   $(TEST_DIR)/heapq/test_heapq_destroy.c\
 	   $(TEST_DIR)/heapq/test_heapq_peek.c\
-	   $(TEST_DIR)/dongle/test_dongles_create.c\
-	   $(TEST_DIR)/dongle/test_dongles_destroy.c\
-	   $(TEST_DIR)/coder/test_coders_create.c\
-	   $(TEST_DIR)/coder/test_coders_destroy.c\
+	   $(TEST_DIR)/dongle/test_dongle_create.c\
+	   $(TEST_DIR)/dongle/test_dongle_destroy.c\
+	   $(TEST_DIR)/coder/test_coder_create.c\
+	   $(TEST_DIR)/coder/test_coder_destroy.c\
 	   $(TEST_DIR)/workspace/test_workspace_create.c\
 	   $(TEST_DIR)/workspace/test_workspace_destroy.c\
 
@@ -150,6 +150,9 @@ tests-run: $(TEST_BINS)
 		if [ $$res -eq 0 ]; then \
 			printf "\033[1;32m✔ success\033[0m\n\n"; \
 		else \
+			if [ "$(TEST_VERBOSE)" != "1" ]; then \
+				printf "%s\n" "$$out"; \
+			fi; \
 			printf "\033[1;31m✖ failure in $$name\033[0m\n\n"; \
 			failed=1; \
 		fi; \
@@ -193,8 +196,8 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.o $(CORE_OBJS)
 	$(CC) -o $@ $< $(CORE_OBJS)
 
 .PHONY: tests-run check-tests-run
-
 .PRECIOUS: $(BUILD_DIR)/%.o
+
 endif
 
 -include $(DEPS) $(TEST_DEPS)

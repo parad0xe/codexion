@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dongles_destroy.c                                  :+:      :+:    :+:   */
+/*   dongle_destroy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 20:00:36 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/29 21:10:44 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 11:43:31 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-void	dongles_destroy(t_dongle **dongles, size_t count)
+void	dongle_destroy(t_dongle **dongles, size_t count)
 {
 	size_t	i;
 

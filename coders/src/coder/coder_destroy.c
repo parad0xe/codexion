@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coders_destroy.c                                   :+:      :+:    :+:   */
+/*   coder_destroy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 16:45:18 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 19:25:00 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 11:43:49 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coders.h"
+#include "coder.h"
 #include <stdlib.h>
 
-void	coders_destroy(t_coder **coders)
+void	coder_destroy(t_coder **coders)
 {
 	if (*coders == NULL)
 		return ;

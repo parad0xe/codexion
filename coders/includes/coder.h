@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coders.h                                           :+:      :+:    :+:   */
+/*   coder.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:49:16 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 01:01:39 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 11:42:50 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CODERS_H
-# define CODERS_H
+#ifndef CODER_H
+# define CODER_H
 
 # include "codexion.h"
 # include "dongle.h"
@@ -35,9 +35,9 @@ typedef struct s_coder
 	t_dongle		*right_dongle;
 }					t_coder;
 
-t_coder				*coders_create(t_args *args, t_dongle *dongles,
+t_coder				*coder_create(t_args *args, t_dongle *dongles,
 						pthread_mutex_t *start_mutex);
-void				coders_destroy(t_coder **coders);
+void				coder_destroy(t_coder **coders);
 
 int					coder_wait_dongles(t_coder *coder);
 void				coder_release_dongles(t_coder *coder);

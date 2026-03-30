@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_coders_create.c                               :+:      :+:    :+:   */
+/*   test_coder_create.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:03:12 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/29 22:27:09 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 11:46:35 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coders.h"
+#include "coder.h"
 #include "dongle.h"
 #include "test.h"
 #include <stddef.h>
@@ -37,21 +37,21 @@ int	main(void)
 
 	_init_mock_args(&args);
 	pthread_mutex_init(&start_mutex, NULL);
-	dongles = dongles_create(args.number_of_coders, args.dongle_cooldown);
+	dongles = dongle_create(args.number_of_coders, args.dongle_cooldown);
 	custom_assert("create valid dongles for testing", dongles != NULL);
-	coders = coders_create(&args, dongles, &start_mutex);
+	coders = coder_create(&args, dongles, &start_mutex);
 	custom_assert("create valid coders array", coders != NULL);
 	custom_assert("assign left dongle", coders[0].left_dongle == &dongles[0]);
 	custom_assert("assign right dongle", coders[0].right_dongle == &dongles[1]);
 	custom_assert("assign start mutex", coders[0].start_mutex == &start_mutex);
 	custom_assert("set correct scheduler", strcmp(coders[0].scheduler,
 			"fifo") == 0);
-	coders_destroy(&coders);
-	custom_assert("return NULL if args is NULL", coders_create(NULL, dongles,
+	coder_destroy(&coders);
+	custom_assert("return NULL if args is NULL", coder_create(NULL, dongles,
 			&start_mutex) == NULL);
-	custom_assert("return NULL if dongles is NULL", coders_create(&args, NULL,
+	custom_assert("return NULL if dongles is NULL", coder_create(&args, NULL,
 			&start_mutex) == NULL);
-	dongles_destroy(&dongles, args.number_of_coders);
+	dongle_destroy(&dongles, args.number_of_coders);
 	pthread_mutex_destroy(&start_mutex);
 	return (0);
 }

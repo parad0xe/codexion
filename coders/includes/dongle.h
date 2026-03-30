@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:50:04 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/29 22:50:12 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 11:43:05 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_dongle
 	int				access_mutex_init;
 }					t_dongle;
 
-t_dongle			*dongles_create(size_t count, int dongle_cooldown);
-void				dongles_destroy(t_dongle **dongles, size_t count);
+t_dongle			*dongle_create(size_t count, int dongle_cooldown);
+void				dongle_destroy(t_dongle **dongles, size_t count);
 
 size_t				dongle_get_ready_timestamp(t_dongle *dongle);
 

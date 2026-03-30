@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_dongles_create.c                              :+:      :+:    :+:   */
+/*   test_dongle_create.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 18:35:18 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/29 22:22:37 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 11:47:22 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	main(void)
 
 	size = 3;
 	cooldown = 15;
-	dongles = dongles_create(size, cooldown);
+	dongles = dongle_create(size, cooldown);
 	_test_dongles(dongles, size, cooldown);
-	dongles_destroy(&dongles, size);
+	dongle_destroy(&dongles, size);
 	return (0);
 }

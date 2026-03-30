@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coders_create.c                                    :+:      :+:    :+:   */
+/*   coder_create.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 16:45:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 01:01:33 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 11:43:42 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coders.h"
+#include "coder.h"
 #include "dongle.h"
 #include "utils.h"
 #include <stdlib.h>
@@ -31,7 +31,7 @@ static void	_coder_init(t_coder *coder, int id, t_dongle *dongles, t_args *args)
 	set_absolute_timeout(&coder->burnout_at, args->time_to_burnout);
 }
 
-t_coder	*coders_create(t_args *args, t_dongle *dongles,
+t_coder	*coder_create(t_args *args, t_dongle *dongles,
 		pthread_mutex_t *start_mutex)
 {
 	t_coder	*coders;
