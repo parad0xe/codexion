@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:03:21 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 11:45:39 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 17:53:56 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	main(int argc, char **argv)
 	workspace = workspace_create(&args);
 	if (workspace == NULL)
 		return (stop(workspace, ERR_WORKSPACE_MALLOC));
-	workspace_start(workspace);
-	workspace_join(workspace);
+	workspace_thread_start(workspace);
+	workspace_thread_join(workspace);
 	printf("normally terminated\n");
 	return (stop(workspace, 0));
 }

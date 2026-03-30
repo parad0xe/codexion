@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   dongle_state_usage.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 14:20:28 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 14:13:54 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/29 22:48:48 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/30 13:58:46 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "dongle.h"
+#include "utils.h"
+#include <unistd.h>
 
-# include <stddef.h>
-# include <sys/time.h>
-
-// math
-int		math_absmod(int n, int mod);
-
-// time
-void	time_sleep_ms(size_t ms);
-size_t	time_get_current_ms(void);
-void	time_set_abstimeout(struct timespec *ts, size_t timeout);
-size_t	time_convert_timespec_to_ms(struct timespec *ts);
-
-#endif
+size_t	dongle_get_ready_at(t_dongle *dongle)
+{
+	return (time_convert_timespec_to_ms(&dongle->available_at));
+}

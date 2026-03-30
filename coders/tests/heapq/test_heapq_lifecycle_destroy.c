@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   test_heapq_lifecycle_destroy.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 14:20:28 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 14:13:54 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/25 20:55:00 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/28 18:01:01 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "heapq.h"
+#include "test.h"
 
-# include <stddef.h>
-# include <sys/time.h>
+int	main(void)
+{
+	t_heapq	*heapq;
 
-// math
-int		math_absmod(int n, int mod);
-
-// time
-void	time_sleep_ms(size_t ms);
-size_t	time_get_current_ms(void);
-void	time_set_abstimeout(struct timespec *ts, size_t timeout);
-size_t	time_convert_timespec_to_ms(struct timespec *ts);
-
-#endif
+	heapq = heapq_create();
+	custom_assert("it should create a valid heapq", heapq != NULL);
+	custom_assert("it should start with count 0", heapq->count == 0);
+	heapq_destroy(&heapq);
+	custom_assert("it should set heapq to NULL after destroy", heapq == NULL);
+	return (0);
+}

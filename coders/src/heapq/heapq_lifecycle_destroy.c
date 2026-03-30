@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   heapq_lifecycle_destroy.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 14:20:28 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 14:13:54 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/25 17:57:15 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/28 09:10:45 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "heapq.h"
+#include <stdlib.h>
 
-# include <stddef.h>
-# include <sys/time.h>
+void	heapq_destroy(t_heapq **heapq)
+{
+	int	i;
 
-// math
-int		math_absmod(int n, int mod);
-
-// time
-void	time_sleep_ms(size_t ms);
-size_t	time_get_current_ms(void);
-void	time_set_abstimeout(struct timespec *ts, size_t timeout);
-size_t	time_convert_timespec_to_ms(struct timespec *ts);
-
-#endif
+	if (*heapq == NULL)
+		return ;
+	if ((*heapq)->items != NULL)
+	{
+		i = -1;
+		while (++i < (*heapq)->count)
+			free((*heapq)->items[i]);
+		free((*heapq)->items);
+	}
+	free(*heapq);
+	*heapq = NULL;
+}

@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   util_math.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 14:20:28 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 14:13:54 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/25 14:19:43 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/30 13:30:23 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+int	math_absmod(int n, int mod)
+{
+	int	remainder;
 
-# include <stddef.h>
-# include <sys/time.h>
-
-// math
-int		math_absmod(int n, int mod);
-
-// time
-void	time_sleep_ms(size_t ms);
-size_t	time_get_current_ms(void);
-void	time_set_abstimeout(struct timespec *ts, size_t timeout);
-size_t	time_convert_timespec_to_ms(struct timespec *ts);
-
-#endif
+	remainder = n % mod;
+	if (remainder < 0)
+		return (remainder + mod);
+	return (remainder);
+}

@@ -1,0 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_heapq_action_enqueue.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/25 20:56:20 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/28 18:01:14 by nlallema         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "heapq.h"
+#include "test.h"
+
+int	main(void)
+{
+	t_heapq	*heapq;
+
+	heapq = heapq_create();
+	custom_assert("it should create a valid heapq", heapq != NULL);
+	heapq_enqueue(heapq, (void *)10, 20);
+	custom_assert("it should have element with priority 20 at top",
+		heapq->items[0]->data == (void *)10);
+	heapq_enqueue(heapq, (void *)30, 10);
+	custom_assert("it should move element with priority 10 to top",
+		heapq->items[0]->data == (void *)30);
+	heapq_enqueue(heapq, (void *)20, 30);
+	custom_assert("it should keep element with priority 10 at top",
+		heapq->items[0]->data == (void *)30);
+	heapq_destroy(&heapq);
+}

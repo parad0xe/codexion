@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   coder_state_priority.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 14:20:28 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 14:13:54 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/30 00:12:50 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/30 13:52:14 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "coder.h"
+#include <stddef.h>
+#include <string.h>
 
-# include <stddef.h>
-# include <sys/time.h>
+size_t	coder_get_priority(t_coder *coder)
+{
+	size_t	priority;
 
-// math
-int		math_absmod(int n, int mod);
-
-// time
-void	time_sleep_ms(size_t ms);
-size_t	time_get_current_ms(void);
-void	time_set_abstimeout(struct timespec *ts, size_t timeout);
-size_t	time_convert_timespec_to_ms(struct timespec *ts);
-
-#endif
+	priority = 0;
+	if (strcmp(coder->scheduler, "edf") == 0)
+		priority = coder_get_burnout_at(coder);
+	return (priority);
+}

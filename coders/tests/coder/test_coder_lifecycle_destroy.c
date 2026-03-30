@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   test_coder_lifecycle_destroy.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 14:20:28 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 14:13:54 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/28 17:16:40 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/30 11:46:49 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "coder.h"
+#include "test.h"
+#include <stdlib.h>
 
-# include <stddef.h>
-# include <sys/time.h>
+int	main(void)
+{
+	t_coder	*coders;
 
-// math
-int		math_absmod(int n, int mod);
-
-// time
-void	time_sleep_ms(size_t ms);
-size_t	time_get_current_ms(void);
-void	time_set_abstimeout(struct timespec *ts, size_t timeout);
-size_t	time_convert_timespec_to_ms(struct timespec *ts);
-
-#endif
+	coders = malloc(sizeof(t_coder) * 2);
+	custom_assert("allocate coders manually", coders != NULL);
+	coder_destroy(&coders);
+	custom_assert("set pointer to NULL after destroy", coders == NULL);
+	coder_destroy(&coders);
+	custom_assert("safely handle already NULL pointer", coders == NULL);
+	return (0);
+}

@@ -21,29 +21,34 @@ VALGRIND = valgrind --leak-check=full \
 
 # files
 SRCS =\
-	  $(SRC_DIR)/heapq/heapq_create.c\
-	  $(SRC_DIR)/heapq/heapq_destroy.c\
-	  $(SRC_DIR)/heapq/heapq_enqueue.c\
-	  $(SRC_DIR)/heapq/heapq_dequeue.c\
+	  $(SRC_DIR)/heapq/heapq_lifecycle_create.c\
+	  $(SRC_DIR)/heapq/heapq_lifecycle_destroy.c\
+	  $(SRC_DIR)/heapq/heapq_action_enqueue.c\
+	  $(SRC_DIR)/heapq/heapq_action_dequeue.c\
+	  $(SRC_DIR)/heapq/heapq_action_peek.c\
 	  $(SRC_DIR)/heapq/heapq_debug.c\
-	  $(SRC_DIR)/heapq/heapq_peek.c\
-	  $(SRC_DIR)/dongle/dongle_create.c\
-	  $(SRC_DIR)/dongle/dongle_destroy.c\
-	  $(SRC_DIR)/dongle/dongle_get_ready_timestamp.c\
-	  $(SRC_DIR)/coder/coder_create.c\
-	  $(SRC_DIR)/coder/coder_destroy.c\
-	  $(SRC_DIR)/coder/coder_wait_dongles.c\
-	  $(SRC_DIR)/coder/coder_release_dongles.c\
-	  $(SRC_DIR)/coder/coder_has_burnout.c\
-	  $(SRC_DIR)/coder/coder_get_priority.c\
-	  $(SRC_DIR)/coder/coder_routine.c\
-	  $(SRC_DIR)/workspace/workspace_create.c\
-	  $(SRC_DIR)/workspace/workspace_destroy.c\
-	  $(SRC_DIR)/workspace/workspace_start.c\
-	  $(SRC_DIR)/workspace/workspace_join.c\
-	  $(SRC_DIR)/utils/absmod.c\
-	  $(SRC_DIR)/utils/get_current_timestamp.c\
-	  $(SRC_DIR)/utils/set_absolute_timeout.c\
+	  $(SRC_DIR)/dongle/dongle_lifecycle_create.c\
+	  $(SRC_DIR)/dongle/dongle_lifecycle_destroy.c\
+	  $(SRC_DIR)/dongle/dongle_action_wait.c\
+	  $(SRC_DIR)/dongle/dongle_state_usage.c\
+	  $(SRC_DIR)/coder/coder_lifecycle_create.c\
+	  $(SRC_DIR)/coder/coder_lifecycle_destroy.c\
+	  $(SRC_DIR)/coder/coder_lifecycle_routine.c\
+	  $(SRC_DIR)/coder/coder_dongles_wait.c\
+	  $(SRC_DIR)/coder/coder_dongles_release.c\
+	  $(SRC_DIR)/coder/coder_action_sync.c\
+	  $(SRC_DIR)/coder/coder_action_die.c\
+	  $(SRC_DIR)/coder/coder_action_compile.c\
+	  $(SRC_DIR)/coder/coder_action_debug.c\
+	  $(SRC_DIR)/coder/coder_action_refactor.c\
+	  $(SRC_DIR)/coder/coder_state_burnout.c\
+	  $(SRC_DIR)/coder/coder_state_priority.c\
+	  $(SRC_DIR)/workspace/workspace_lifecycle_create.c\
+	  $(SRC_DIR)/workspace/workspace_lifecycle_destroy.c\
+	  $(SRC_DIR)/workspace/workspace_thread_start.c\
+	  $(SRC_DIR)/workspace/workspace_thread_join.c\
+	  $(SRC_DIR)/utils/util_time.c\
+	  $(SRC_DIR)/utils/util_math.c\
 	  $(SRC_DIR)/main.c\
 
 TEST_VERBOSE ?= 0
@@ -51,17 +56,17 @@ TEST_SRCS =\
 		   $(TEST_DIR)/_core/test_utils.c
 
 TESTS =\
-	   $(TEST_DIR)/heapq/test_heapq_create.c\
-	   $(TEST_DIR)/heapq/test_heapq_enqueue.c\
-	   $(TEST_DIR)/heapq/test_heapq_dequeue.c\
-	   $(TEST_DIR)/heapq/test_heapq_destroy.c\
-	   $(TEST_DIR)/heapq/test_heapq_peek.c\
-	   $(TEST_DIR)/dongle/test_dongle_create.c\
-	   $(TEST_DIR)/dongle/test_dongle_destroy.c\
-	   $(TEST_DIR)/coder/test_coder_create.c\
-	   $(TEST_DIR)/coder/test_coder_destroy.c\
-	   $(TEST_DIR)/workspace/test_workspace_create.c\
-	   $(TEST_DIR)/workspace/test_workspace_destroy.c\
+	   $(TEST_DIR)/heapq/test_heapq_lifecycle_create.c\
+	   $(TEST_DIR)/heapq/test_heapq_lifecycle_destroy.c\
+	   $(TEST_DIR)/heapq/test_heapq_action_enqueue.c\
+	   $(TEST_DIR)/heapq/test_heapq_action_dequeue.c\
+	   $(TEST_DIR)/heapq/test_heapq_action_peek.c\
+	   $(TEST_DIR)/dongle/test_dongle_lifecycle_create.c\
+	   $(TEST_DIR)/dongle/test_dongle_lifecycle_destroy.c\
+	   $(TEST_DIR)/coder/test_coder_lifecycle_create.c\
+	   $(TEST_DIR)/coder/test_coder_lifecycle_destroy.c\
+	   $(TEST_DIR)/workspace/test_workspace_lifecycle_create.c\
+	   $(TEST_DIR)/workspace/test_workspace_lifecycle_destroy.c\
 
 # main objects
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)

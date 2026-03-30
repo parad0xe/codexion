@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:04:44 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 11:45:22 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/30 12:46:43 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ typedef struct s_workspace
 	size_t			coder_count;
 }					t_workspace;
 
+// lifecycle
 t_workspace			*workspace_create(t_args *args);
 void				workspace_destroy(t_workspace **workspace);
 
-void				workspace_start(t_workspace *workspace);
-void				workspace_join(t_workspace *workspace);
+// thread actions
+void				workspace_thread_start(t_workspace *workspace);
+void				workspace_thread_join(t_workspace *workspace);
 
 #endif

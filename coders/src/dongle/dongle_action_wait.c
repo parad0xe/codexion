@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   dongle_action_wait.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 14:20:28 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 14:13:54 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/30 13:12:41 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/30 13:35:39 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "dongle.h"
+#include "utils.h"
+#include <unistd.h>
 
-# include <stddef.h>
-# include <sys/time.h>
+void	dongle_wait_cooldown(t_dongle *dongle)
+{
+	size_t	ready_at;
 
-// math
-int		math_absmod(int n, int mod);
-
-// time
-void	time_sleep_ms(size_t ms);
-size_t	time_get_current_ms(void);
-void	time_set_abstimeout(struct timespec *ts, size_t timeout);
-size_t	time_convert_timespec_to_ms(struct timespec *ts);
-
-#endif
+	ready_at = dongle_get_ready_at(dongle);
+	if (ready_at > time_get_current_ms())
+		time_sleep_ms(ready_at - time_get_current_ms());
+}
