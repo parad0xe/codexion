@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:05:34 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 12:05:50 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 14:34:58 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_workspace	*workspace_create(t_args *args)
 	t_workspace	*workspace;
 	t_errcode	errcode;
 
+	if (args == NULL)
+		return (NULL);
 	workspace = malloc(sizeof(t_workspace));
 	if (workspace == NULL)
 		return (NULL);

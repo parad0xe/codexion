@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 19:04:55 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 00:24:17 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 14:45:53 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	_heapq_print_tree(t_heapq *heapq, int index, int depth)
 	int	left_index;
 	int	right_index;
 
-	if (index >= heapq->count)
+	if (heapq == NULL || index >= heapq->count)
 		return ;
 	left_index = 2 * index + 1;
 	right_index = 2 * index + 2;

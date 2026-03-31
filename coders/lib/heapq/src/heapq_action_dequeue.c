@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 19:13:38 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 09:10:35 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 14:44:24 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	*heapq_dequeue(t_heapq *heapq)
 	t_heapq_data	*heapq_data;
 	void			*data;
 
-	if (heapq->count == 0)
+	if (heapq == NULL || heapq->count == 0)
 		return (NULL);
 	heapq_data = heapq->items[0];
 	_heapq_heapify_down(heapq);

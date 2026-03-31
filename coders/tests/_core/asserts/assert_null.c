@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   assert_null.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 21:41:22 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 13:47:27 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/31 13:14:08 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/31 13:26:35 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
+#include "test.h"
+#include <stdlib.h>
 
-void	test_group(char *title);
-void	test_loop_group(char *title, int index);
-void	test_ok(void);
-void	test_ko(void);
-void	custom_assert(char *message, int condition);
+void	assert_is_null(char *message, void *ptr)
+{
+	custom_assert(message, ptr == NULL);
+}
 
-// asserts
-void	assert_is_null(char *message, void *ptr);
-void	assert_is_not_null(char *message, void *ptr);
-
-#endif
+void	assert_is_not_null(char *message, void *ptr)
+{
+	custom_assert(message, ptr != NULL);
+}

@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 10:35:30 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/29 21:27:45 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 14:38:09 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 // heapq errors
 # define ERR_HEAPQ_MALLOC 10
+# define ERR_HEAPQ_NULL 11
 
 // dongle errors
 # define ERR_DONGLE_MALLOC 20

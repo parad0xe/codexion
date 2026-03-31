@@ -4,15 +4,15 @@ ARGS ?=
 
 # directories
 SRC_DIR = src
+LIB_DIR = lib
 TEST_DIR = tests
 BUILD_DIR = build
-INCLUDE_DIR = includes
 
 # compiler and flags
 CC = cc
 CFLAGS = -MMD -MP -pthread
 MAKEFLAGS += -j $$(nproc)
-INCLUDES = -I $(INCLUDE_DIR)
+INCLUDES = -I include -I lib/heapq/include
 
 # tools
 VALGRIND = valgrind --leak-check=full \
@@ -21,12 +21,12 @@ VALGRIND = valgrind --leak-check=full \
 
 # files
 SRCS =\
-	  $(SRC_DIR)/heapq/heapq_lifecycle_create.c\
-	  $(SRC_DIR)/heapq/heapq_lifecycle_destroy.c\
-	  $(SRC_DIR)/heapq/heapq_action_enqueue.c\
-	  $(SRC_DIR)/heapq/heapq_action_dequeue.c\
-	  $(SRC_DIR)/heapq/heapq_action_peek.c\
-	  $(SRC_DIR)/heapq/heapq_debug.c\
+	  $(LIB_DIR)/heapq/src/heapq_lifecycle_create.c\
+	  $(LIB_DIR)/heapq/src/heapq_lifecycle_destroy.c\
+	  $(LIB_DIR)/heapq/src/heapq_action_enqueue.c\
+	  $(LIB_DIR)/heapq/src/heapq_action_dequeue.c\
+	  $(LIB_DIR)/heapq/src/heapq_action_peek.c\
+	  $(LIB_DIR)/heapq/src/heapq_debug.c\
 	  $(SRC_DIR)/dongle/dongle_lifecycle_create.c\
 	  $(SRC_DIR)/dongle/dongle_lifecycle_destroy.c\
 	  $(SRC_DIR)/dongle/dongle_action_wait.c\
@@ -53,7 +53,8 @@ SRCS =\
 
 TEST_VERBOSE ?= 0
 TEST_SRCS =\
-		   $(TEST_DIR)/_core/test_utils.c
+		   $(TEST_DIR)/_core/asserts/assert_null.c\
+		   $(TEST_DIR)/_core/test_util.c\
 
 TESTS =\
 	   $(TEST_DIR)/heapq/test_heapq_lifecycle_create.c\
@@ -159,13 +160,13 @@ tests-run: $(TEST_BINS)
 				printf "%s\n" "$$out"; \
 			fi; \
 			printf "\033[1;31m✖ failure in $$name\033[0m\n\n"; \
-			failed=1; \
+			failed=$$((failed + 1)); \
 		fi; \
 	done; \
 	if [ $$failed -eq 0 ]; then \
 		printf "\033[1;32m✔ all tests passed successfully\033[0m\n"; \
 	else \
-		printf "\033[1;31m✖ some tests failed\033[0m\n"; \
+		printf "\033[1;31m✖ $$failed test(s) failed\033[0m\n"; \
 		exit 1; \
 	fi
 
@@ -180,13 +181,13 @@ check-tests-run: $(TEST_BINS)
 		else \
 			printf "\033[0;33m%s\033[0m\n" "$$out"; \
 			printf "\033[1;31m✖ memory error in $$name\033[0m\n\n"; \
-			failed=1; \
+			failed=$$((failed + 1)); \
 		fi; \
 	done; \
 	if [ $$failed -eq 0 ]; then \
 		printf "\033[1;32m✔ all memory checks passed\033[0m\n"; \
 	else \
-		printf "\033[1;31m✖ some memory checks failed\033[0m\n"; \
+		printf "\033[1;31m✖ $$failed memory checks failed\033[0m\n"; \
 		exit 1; \
 	fi
 

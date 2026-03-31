@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:49:16 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 12:07:36 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 15:01:07 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_coder
 typedef struct s_coder_array
 {
 	t_coder			*items;
-	int				count;
+	size_t			count;
 	pthread_mutex_t	start_mutex;
 	int				start_mutex_init;
 	pthread_cond_t	start_cond;

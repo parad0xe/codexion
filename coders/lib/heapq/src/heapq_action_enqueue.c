@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:06:39 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/29 23:31:03 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 14:38:15 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ t_errcode	heapq_enqueue(t_heapq *heapq, void *data, size_t priority)
 	int				errcode;
 	t_heapq_data	*heapq_data;
 
+	if (heapq == NULL)
+		return (ERR_HEAPQ_NULL);
 	heapq_data = _heapq_create_data(data, priority);
 	if (heapq_data == NULL)
 		return (ERR_HEAPQ_MALLOC);
