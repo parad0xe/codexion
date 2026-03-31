@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:15:42 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 11:50:10 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 12:23:57 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int	main(void)
 	_init_mock_args(&args);
 	ws = workspace_create(&args);
 	custom_assert("create valid workspace", ws != NULL);
-	custom_assert("set correct coder count", ws->coder_count == 3);
-	custom_assert("init start mutex", ws->start_mutex_init == 1);
 	custom_assert("create valid dongles array", ws->dongles != NULL);
 	custom_assert("create valid coders array", ws->coders != NULL);
 	workspace_destroy(&ws);

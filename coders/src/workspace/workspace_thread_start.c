@@ -6,23 +6,24 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 01:12:33 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 12:40:27 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 12:43:40 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "workspace.h"
+#include <pthread.h>
 
 void	workspace_thread_start(t_workspace *workspace)
 {
 	size_t	i;
 
-	pthread_mutex_lock(&workspace->start_mutex);
 	i = 0;
-	while (i < workspace->coder_count)
+	while (i < workspace->coders->count)
 	{
-		pthread_create(&workspace->coders[i].tid, NULL, &coder_routine,
-			&workspace->coders[i]);
+		pthread_create(&workspace->coders->items[i].tid, NULL, &coder_routine,
+			&workspace->coders->items[i]);
 		i++;
 	}
-	pthread_mutex_unlock(&workspace->start_mutex);
+	workspace->coders->can_start = 1;
+	pthread_cond_broadcast(&workspace->coders->start_cond);
 }

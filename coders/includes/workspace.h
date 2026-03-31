@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:04:44 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 12:46:43 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 12:05:36 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@
 
 typedef struct s_workspace
 {
-	t_coder			*coders;
+	t_coder_array	*coders;
 	t_dongle		*dongles;
-	pthread_mutex_t	start_mutex;
-	int				start_mutex_init;
-	size_t			coder_count;
 }					t_workspace;
 
 // lifecycle

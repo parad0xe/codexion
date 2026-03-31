@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 01:14:20 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 12:40:17 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 12:08:35 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	workspace_thread_join(t_workspace *workspace)
 	size_t	i;
 
 	i = 0;
-	while (i < workspace->coder_count)
+	while (i < workspace->coders->count)
 	{
-		pthread_join(workspace->coders[i].tid, NULL);
+		pthread_join(workspace->coders->items[i].tid, NULL);
 		i++;
 	}
 }

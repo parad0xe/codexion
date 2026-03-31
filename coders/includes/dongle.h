@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:50:04 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 13:56:37 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 12:47:40 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef struct s_dongle
 {
 	int				is_available;
 	size_t			cooldown;
-	//size_t			last_usage;
 	struct timespec	available_at;
 	t_heapq			*queue;
 	pthread_cond_t	access_cond;

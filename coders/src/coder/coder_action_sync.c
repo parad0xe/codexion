@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 11:57:28 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 13:55:24 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 12:44:19 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 void	coder_sync(t_coder *coder)
 {
 	pthread_mutex_lock(coder->start_mutex);
+	while (!(*coder->can_start))
+		pthread_cond_wait(coder->start_cond, coder->start_mutex);
 	pthread_mutex_unlock(coder->start_mutex);
 	time_set_abstimeout(&coder->burnout_at, coder->time_to_burnout);
 	if (coder->id % 2 != 0)

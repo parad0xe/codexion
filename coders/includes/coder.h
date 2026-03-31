@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:49:16 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 13:54:33 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 12:07:36 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_coder
 {
 	int				id;
 	pthread_t		tid;
+	int				*can_start;
+	pthread_cond_t	*start_cond;
 	pthread_mutex_t	*start_mutex;
 	size_t			time_to_burnout;
 	size_t			time_to_compile;
@@ -34,10 +36,20 @@ typedef struct s_coder
 	t_dongle		*right_dongle;
 }					t_coder;
 
+typedef struct s_coder_array
+{
+	t_coder			*items;
+	int				count;
+	pthread_mutex_t	start_mutex;
+	int				start_mutex_init;
+	pthread_cond_t	start_cond;
+	int				start_cond_init;
+	int				can_start;
+}					t_coder_array;
+
 // lifecycle
-t_coder				*coder_create(t_args *args, t_dongle *dongles,
-						pthread_mutex_t *start_mutex);
-void				coder_destroy(t_coder **coders);
+t_coder_array		*coder_create(t_args *args, t_dongle *dongles);
+void				coder_destroy(t_coder_array **coders);
 void				*coder_routine(void *thread_args);
 
 // dongles
