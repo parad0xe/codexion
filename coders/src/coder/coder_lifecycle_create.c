@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 16:45:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 15:31:29 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 16:40:14 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-static void	_coder_init(t_coder *coder, int id, t_dongle *dongles, t_args *args)
+static void	_coder_init(t_coder *coder, int index, t_dongle *dongles,
+		t_args *args)
 {
 	int	right_dongle_index;
 
-	right_dongle_index = math_absmod(id - 1, args->number_of_coders);
-	coder->id = id;
+	right_dongle_index = math_absmod(index - 1, args->number_of_coders);
+	coder->id = index + 1;
 	coder->time_to_burnout = args->time_to_burnout;
 	coder->time_to_compile = args->time_to_compile;
 	coder->time_to_debug = args->time_to_debug;
 	coder->time_to_refactor = args->time_to_refactor;
 	coder->number_of_compiles = args->number_of_compiles;
 	coder->scheduler = args->scheduler;
-	coder->left_dongle = &dongles[id];
+	coder->left_dongle = &dongles[index];
 	coder->right_dongle = NULL;
 	if (args->number_of_coders > 1)
 		coder->right_dongle = &dongles[right_dongle_index];
