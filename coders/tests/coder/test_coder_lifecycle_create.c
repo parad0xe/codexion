@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:03:12 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 14:13:05 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 15:41:33 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ static void	_test_single_coder(void)
 	coders = coder_create(&args, dongles);
 	assert_is_null("handle right dongle when alone (null)",
 		coders->items[0].right_dongle);
-	dongle_destroy(&dongles, 1);
 	coder_destroy(&coders);
+	dongle_destroy(&dongles, 1);
 }
 
 static void	_test_multiple_coder(void)
@@ -80,6 +80,9 @@ static void	_test_multiple_coder(void)
 	_init_mock_args(&args);
 	dongles = dongle_create(args.number_of_coders, args.dongle_cooldown);
 	assert_is_not_null("handle test dongles creation", dongles);
+	args.scheduler = "nop";
+	assert_is_null("handle invalid scheduler", coder_create(&args, dongles));
+	_init_mock_args(&args);
 	coders = coder_create(&args, dongles);
 	assert_is_not_null("handle coders array creation", coders);
 	custom_assert("handle start mutex init", coders->start_mutex_init == 1);

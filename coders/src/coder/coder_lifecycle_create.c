@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 16:45:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 13:07:24 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 15:31:29 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ t_coder_array	*coder_create(t_args *args, t_dongle *dongles)
 	t_errcode		errcode;
 
 	if (args == NULL || dongles == NULL)
+		return (NULL);
+	if (strcmp(args->scheduler, "fifo") != 0 && strcmp(args->scheduler,
+			"edf") != 0)
 		return (NULL);
 	coders = malloc(sizeof(t_coder_array));
 	if (coders == NULL)
