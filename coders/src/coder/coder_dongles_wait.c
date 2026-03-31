@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 11:51:31 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 16:50:35 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/03/31 15:16:10 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static int	_attempt_acquire(t_coder *coder, t_dongle *first, t_dongle *second)
 	if (_can_acquire_dongle(coder, first) && _can_acquire_dongle(coder, second))
 	{
 		_dequeue_both_thread_unsafe(coder, first, second);
-		first->is_available = 0;
-		second->is_available = 0;
+		dongle_thread_unsafe_acquire(first);
+		dongle_thread_unsafe_acquire(second);
 		pthread_mutex_unlock(&second->access_mutex);
 		pthread_mutex_unlock(&first->access_mutex);
 		return (1);

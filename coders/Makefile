@@ -30,6 +30,8 @@ SRCS =\
 	  $(SRC_DIR)/dongle/dongle_lifecycle_create.c\
 	  $(SRC_DIR)/dongle/dongle_lifecycle_destroy.c\
 	  $(SRC_DIR)/dongle/dongle_action_wait.c\
+	  $(SRC_DIR)/dongle/dongle_action_acquire.c\
+	  $(SRC_DIR)/dongle/dongle_action_release.c\
 	  $(SRC_DIR)/dongle/dongle_state_usage.c\
 	  $(SRC_DIR)/coder/coder_lifecycle_create.c\
 	  $(SRC_DIR)/coder/coder_lifecycle_destroy.c\

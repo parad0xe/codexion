@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coder_dongles_release.c                            :+:      :+:    :+:   */
+/*   dongle_action_release.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/29 14:15:07 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 15:16:53 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/31 15:14:17 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/31 15:14:29 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coder.h"
 #include "dongle.h"
-#include <stdio.h>
+#include "utils.h"
+#include <pthread.h>
 
-void	coder_dongles_release(t_coder *coder)
+void	dongle_thread_safe_release(t_dongle *dongle)
 {
-	dongle_thread_safe_release(coder->left_dongle);
-	printf("coder %d release left dongle\n", coder->id);
-	dongle_thread_safe_release(coder->right_dongle);
-	printf("coder %d release right dongle\n", coder->id);
+	pthread_mutex_lock(&dongle->access_mutex);
+	dongle->is_available = 1;
+	time_set_abstimeout(&dongle->available_at, dongle->cooldown);
+	pthread_mutex_unlock(&dongle->access_mutex);
+	pthread_cond_broadcast(&dongle->access_cond);
 }
