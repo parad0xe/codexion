@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:03:12 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 15:41:33 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/01 12:48:32 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void	_test_coder_content(t_coder_array *coders, t_dongle *dongles,
 			% args->number_of_coders]);
 		custom_assert("handle start mutex linking",
 			coders->items[i].start_mutex == &coders->start_mutex);
+		custom_assert("handle running mutex init",
+			coders->items[i].is_running_mutex_init == 1);
 		custom_assert("handle scheduler policy setting",
 			strcmp(coders->items[i].scheduler, "fifo") == 0);
 		i++;

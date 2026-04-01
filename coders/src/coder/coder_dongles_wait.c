@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 11:51:31 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 15:16:10 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/01 16:23:41 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ static int	_attempt_acquire(t_coder *coder, t_dongle *first, t_dongle *second)
 	if (_can_acquire_dongle(coder, first) && _can_acquire_dongle(coder, second))
 	{
 		_dequeue_both_thread_unsafe(coder, first, second);
-		dongle_thread_unsafe_acquire(first);
-		dongle_thread_unsafe_acquire(second);
+		coder_dongles_acquire_thread_unsafe(coder);
 		pthread_mutex_unlock(&second->access_mutex);
 		pthread_mutex_unlock(&first->access_mutex);
-		return (1);
+		return (coder_is_running_thread_safe(coder));
 	}
 	wait_dongle = first;
 	if (_can_acquire_dongle(coder, first))
@@ -99,7 +98,7 @@ int	coder_dongles_wait(t_coder *coder)
 		second = coder->left_dongle;
 	}
 	_enqueue_both_thread_safe(coder, first, second);
-	while (!coder_has_burnout(coder))
+	while (!coder_has_burnout(coder) && coder_is_running_thread_safe(coder))
 	{
 		if (_attempt_acquire(coder, first, second))
 		{

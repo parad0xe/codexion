@@ -38,6 +38,7 @@ SRCS =\
 	  $(SRC_DIR)/coder/coder_lifecycle_routine.c\
 	  $(SRC_DIR)/coder/coder_dongles_wait.c\
 	  $(SRC_DIR)/coder/coder_dongles_release.c\
+	  $(SRC_DIR)/coder/coder_dongles_acquire.c\
 	  $(SRC_DIR)/coder/coder_action_sync.c\
 	  $(SRC_DIR)/coder/coder_action_die.c\
 	  $(SRC_DIR)/coder/coder_action_compile.c\
@@ -45,8 +46,10 @@ SRCS =\
 	  $(SRC_DIR)/coder/coder_action_refactor.c\
 	  $(SRC_DIR)/coder/coder_state_burnout.c\
 	  $(SRC_DIR)/coder/coder_state_priority.c\
+	  $(SRC_DIR)/coder/coder_state_running.c\
 	  $(SRC_DIR)/workspace/workspace_lifecycle_create.c\
 	  $(SRC_DIR)/workspace/workspace_lifecycle_destroy.c\
+	  $(SRC_DIR)/workspace/workspace_lifecycle_monitor.c\
 	  $(SRC_DIR)/workspace/workspace_thread_start.c\
 	  $(SRC_DIR)/workspace/workspace_thread_join.c\
 	  $(SRC_DIR)/utils/util_time.c\

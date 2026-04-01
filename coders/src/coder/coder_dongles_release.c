@@ -6,18 +6,15 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 14:15:07 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 15:16:53 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/01 12:56:27 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "coder.h"
 #include "dongle.h"
-#include <stdio.h>
 
 void	coder_dongles_release(t_coder *coder)
 {
 	dongle_thread_safe_release(coder->left_dongle);
-	printf("coder %d release left dongle\n", coder->id);
 	dongle_thread_safe_release(coder->right_dongle);
-	printf("coder %d release right dongle\n", coder->id);
 }

@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 01:12:33 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 12:43:40 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/01 13:00:53 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	workspace_thread_start(t_workspace *workspace)
 {
 	size_t	i;
 
+	pthread_create(&workspace->thread_monitor_id, NULL, &workspace_monitor,
+		workspace);
 	i = 0;
 	while (i < workspace->coders->count)
 	{
@@ -24,6 +26,8 @@ void	workspace_thread_start(t_workspace *workspace)
 			&workspace->coders->items[i]);
 		i++;
 	}
+	pthread_mutex_lock(&workspace->coders->start_mutex);
 	workspace->coders->can_start = 1;
+	pthread_mutex_unlock(&workspace->coders->start_mutex);
 	pthread_cond_broadcast(&workspace->coders->start_cond);
 }

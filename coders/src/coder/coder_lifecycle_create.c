@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 16:45:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 16:40:14 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/01 12:46:46 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static void	_coder_init(t_coder *coder, int index, t_dongle *dongles,
+static t_errcode	_coder_init(t_coder *coder, int index, t_dongle *dongles,
 		t_args *args)
 {
 	int	right_dongle_index;
@@ -29,37 +29,43 @@ static void	_coder_init(t_coder *coder, int index, t_dongle *dongles,
 	coder->time_to_compile = args->time_to_compile;
 	coder->time_to_debug = args->time_to_debug;
 	coder->time_to_refactor = args->time_to_refactor;
-	coder->number_of_compiles = args->number_of_compiles;
+	coder->number_of_compiles = 0;
 	coder->scheduler = args->scheduler;
 	coder->left_dongle = &dongles[index];
 	coder->right_dongle = NULL;
 	if (args->number_of_coders > 1)
 		coder->right_dongle = &dongles[right_dongle_index];
+	if (pthread_mutex_init(&coder->is_running_mutex, NULL) != 0)
+		return (ERR_MUTEX_INIT);
+	coder->is_running_mutex_init = 1;
+	coder->is_running = 1;
 	time_set_abstimeout(&coder->burnout_at, args->time_to_burnout);
+	return (0);
 }
 
 static t_errcode	_coders_init(t_coder_array *coders, t_dongle *dongles,
 		t_args *args)
 {
-	t_errcode	errcode;
 	size_t		i;
+	t_errcode	errcode;
 
-	coders->count = args->number_of_coders;
-	errcode = pthread_mutex_init(&coders->start_mutex, NULL);
-	if (errcode != 0)
+	coders->count = 0;
+	if (pthread_mutex_init(&coders->start_mutex, NULL) != 0)
 		return (ERR_MUTEX_INIT);
 	coders->start_mutex_init = 1;
-	errcode = pthread_cond_init(&coders->start_cond, NULL);
-	if (errcode != 0)
+	if (pthread_cond_init(&coders->start_cond, NULL) != 0)
 		return (ERR_COND_INIT);
 	coders->start_cond_init = 1;
 	i = 0;
-	while (i < coders->count)
+	while (i < args->number_of_coders)
 	{
-		_coder_init(&coders->items[i], i, dongles, args);
+		errcode = _coder_init(&coders->items[i], i, dongles, args);
+		if (errcode != 0)
+			return (errcode);
 		coders->items[i].start_mutex = &coders->start_mutex;
 		coders->items[i].start_cond = &coders->start_cond;
 		coders->items[i].can_start = &coders->can_start;
+		coders->count += 1;
 		i++;
 	}
 	return (0);
@@ -68,7 +74,6 @@ static t_errcode	_coders_init(t_coder_array *coders, t_dongle *dongles,
 t_coder_array	*coder_create(t_args *args, t_dongle *dongles)
 {
 	t_coder_array	*coders;
-	t_errcode		errcode;
 
 	if (args == NULL || dongles == NULL)
 		return (NULL);
@@ -85,8 +90,7 @@ t_coder_array	*coder_create(t_args *args, t_dongle *dongles)
 		coder_destroy(&coders);
 		return (NULL);
 	}
-	errcode = _coders_init(coders, dongles, args);
-	if (errcode != 0)
+	if (_coders_init(coders, dongles, args) != 0)
 	{
 		coder_destroy(&coders);
 		return (NULL);
