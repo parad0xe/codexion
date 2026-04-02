@@ -58,6 +58,14 @@ SRCS =\
 	  $(SRC_DIR)/utils/time_set_abstimeout.c\
 	  $(SRC_DIR)/utils/time_sleep_ms.c\
 	  $(SRC_DIR)/utils/math_absmod.c\
+	  $(SRC_DIR)/exceptions/exception.c\
+	  $(SRC_DIR)/exceptions/exception_sys.c\
+	  $(SRC_DIR)/exceptions/exception_args.c\
+	  $(SRC_DIR)/exceptions/exception_dongle.c\
+	  $(SRC_DIR)/exceptions/exception_coder.c\
+	  $(SRC_DIR)/exceptions/exception_workspace.c\
+	  $(SRC_DIR)/exceptions/exception_sim.c\
+	  $(SRC_DIR)/exceptions/exception_heapq.c\
 	  $(SRC_DIR)/arguments.c\
 	  $(SRC_DIR)/main.c\
 
@@ -126,17 +134,17 @@ check-debug: build-debug
 	$(VALGRIND) ./$(NAME) $(ARGS)
 
 tests:
-	$(call switch_build_mode,prod,debug)
+	$(call switch_build_mode,debug,prod)
 	@$(MAKE) tests-run \
-		CFLAGS="$(CFLAGS) -g3" \
+		CFLAGS="$(CFLAGS) -Wall -Wextra -Werror -g3" \
 		SRCS="$(SRCS) $(TEST_SRCS)" \
 		INCLUDES="$(INCLUDES) -I tests/_core" \
 		--no-print-directory
 
 check-tests:
-	$(call switch_build_mode,prod,debug)
+	$(call switch_build_mode,debug,prod)
 	@$(MAKE) check-tests-run \
-		CFLAGS="$(CFLAGS) -g3" \
+		CFLAGS="$(CFLAGS) -Wall -Wextra -Werror -g3" \
 		SRCS="$(SRCS) $(TEST_SRCS)" \
 		INCLUDES="$(INCLUDES) -I tests/_core" \
 		--no-print-directory

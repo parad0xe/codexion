@@ -6,11 +6,12 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 11:51:31 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 14:18:19 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 21:40:25 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "coder.h"
+#include "codexion.h"
 #include "dongle.h"
 #include "heapq.h"
 #include "utils.h"
@@ -47,11 +48,17 @@ static void	_dequeue_both_thread_unsafe(t_coder *coder, t_dongle *first,
 static void	_enqueue_both_thread_safe(t_coder *coder, t_dongle *first,
 		t_dongle *second)
 {
+	t_errcode	errcode;
+
 	pthread_mutex_lock(&first->access_mutex);
-	heapq_enqueue(first->queue, coder, coder_get_priority(coder));
+	errcode = heapq_enqueue(first->queue, coder, coder_get_priority(coder));
+	if (errcode != 0)
+		coder->sim->errcode = errcode;
 	pthread_mutex_unlock(&first->access_mutex);
 	pthread_mutex_lock(&second->access_mutex);
-	heapq_enqueue(second->queue, coder, coder_get_priority(coder));
+	errcode = heapq_enqueue(second->queue, coder, coder_get_priority(coder));
+	if (errcode != 0)
+		coder->sim->errcode = errcode;
 	pthread_mutex_unlock(&second->access_mutex);
 }
 

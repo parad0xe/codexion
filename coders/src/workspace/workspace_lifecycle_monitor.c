@@ -6,14 +6,12 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 11:20:37 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 14:32:14 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 21:54:16 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "coder.h"
-#include "utils.h"
 #include "workspace.h"
-#include <stdio.h>
 #include <unistd.h>
 
 /**
@@ -36,38 +34,12 @@ void	_stop_coders(t_workspace *ws)
 }
 
 /**
- * @brief Checks for any burnout and stops all coders if one occurred.
+ * @brief Checks if any coder burned out or if all reached the compile goal.
  *
  * @param ws Workspace containing the coders to evaluate
- * @return 1 if a burnout was detected, 0 otherwise
+ * @return 1 if simulation should stop, 0 otherwise
  */
-static int	_stop_on_any_burnout(t_workspace *ws)
-{
-	unsigned int	i;
-	t_coder			*coder;
-
-	i = 0;
-	while (i < ws->coders->count)
-	{
-		coder = &ws->coders->items[i];
-		if (coder_has_burnout(coder))
-		{
-			_stop_coders(ws);
-			coder_log_thread_safe(coder, "burn out", LOG_ALWAYS);
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-/**
- * @brief Stops the simulation if all coders reached the compile goal.
- *
- * @param ws Workspace containing the coders to evaluate
- * @return 1 if all coders have finished, 0 otherwise
- */
-static int	_stop_on_all_finished(t_workspace *ws)
+static int	_check_coders_state(t_workspace *ws)
 {
 	unsigned int	i;
 	unsigned int	completed;
@@ -78,11 +50,33 @@ static int	_stop_on_all_finished(t_workspace *ws)
 	while (i < ws->coders->count)
 	{
 		coder = &ws->coders->items[i];
+		if (coder_has_burnout(coder))
+		{
+			_stop_coders(ws);
+			coder_log_thread_safe(coder, "burn out", LOG_ALWAYS);
+			return (1);
+		}
 		if (coder->compilation_count >= ws->sim->args.number_of_compiles)
 			completed++;
 		i++;
 	}
 	if (completed == ws->coders->count)
+	{
+		_stop_coders(ws);
+		return (1);
+	}
+	return (0);
+}
+
+/**
+ * @brief Evaluates the global simulation state for any critical errors.
+ *
+ * @param ws Workspace containing the simulation error state
+ * @return 1 if simulation should stop, 0 otherwise
+ */
+static int	_check_sim_state(t_workspace *ws)
+{
+	if (ws->sim->errcode != 0)
 	{
 		_stop_coders(ws);
 		return (1);
@@ -103,9 +97,9 @@ void	*workspace_monitor(void *thread_arg)
 	ws = (t_workspace *)thread_arg;
 	while (1)
 	{
-		if (_stop_on_any_burnout(ws))
+		if (_check_coders_state(ws))
 			break ;
-		if (_stop_on_all_finished(ws))
+		if (_check_sim_state(ws))
 			break ;
 		usleep(500);
 	}

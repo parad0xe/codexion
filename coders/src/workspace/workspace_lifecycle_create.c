@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:05:34 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 14:28:27 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 17:52:57 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,16 @@
  * @param sim Global simulation information and configuration
  * @return 0 on success, error code otherwise
  */
-static t_errcode	_workspace_init(t_workspace *ws, t_sim_info *sim)
+static int	_workspace_init(t_workspace *ws, t_sim_info *sim)
 {
 	ws->sim = sim;
-	ws->dongles = dongle_create(sim->args.number_of_coders,
-			sim->args.dongle_cooldown);
+	ws->dongles = dongle_create(sim);
 	if (ws->dongles == NULL)
-		return (ERR_DONGLE_MALLOC);
+		return (0);
 	ws->coders = coder_create(ws->sim, ws->dongles);
 	if (ws->coders == NULL)
-		return (ERR_CODER_MALLOC);
-	return (0);
+		return (0);
+	return (1);
 }
 
 /**
@@ -47,16 +46,17 @@ static t_errcode	_workspace_init(t_workspace *ws, t_sim_info *sim)
 t_workspace	*workspace_create(t_sim_info *sim)
 {
 	t_workspace	*workspace;
-	t_errcode	errcode;
 
 	if (sim == NULL)
 		return (NULL);
 	workspace = malloc(sizeof(t_workspace));
 	if (workspace == NULL)
+	{
+		sim->errcode = ERR_WORKSPACE_MALLOC;
 		return (NULL);
+	}
 	memset(workspace, 0, sizeof(t_workspace));
-	errcode = _workspace_init(workspace, sim);
-	if (errcode != 0)
+	if (!_workspace_init(workspace, sim))
 	{
 		workspace_destroy(&workspace);
 		return (NULL);

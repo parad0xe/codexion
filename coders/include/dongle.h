@@ -6,13 +6,14 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:50:04 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:41:43 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 17:43:40 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DONGLE_H
 # define DONGLE_H
 
+# include "codexion.h"
 # include "heapq.h"
 # include <pthread.h>
 # include <stddef.h>
@@ -30,7 +31,7 @@ typedef struct s_dongle
 }					t_dongle;
 
 // lifecycle
-t_dongle			*dongle_create(size_t count, int dongle_cooldown);
+t_dongle			*dongle_create(t_sim_info *sim);
 void				dongle_destroy(t_dongle **dongles, size_t count);
 
 // actions
