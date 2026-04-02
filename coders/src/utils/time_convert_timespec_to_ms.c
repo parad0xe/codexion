@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dongle_action_wait.c                               :+:      :+:    :+:   */
+/*   time_convert_timespec_to_ms.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 13:12:41 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 14:24:09 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/04/02 13:34:21 by nlallema          #+#    #+#             */
+/*   Updated: 2026/04/02 14:27:14 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dongle.h"
 #include "utils.h"
+#include <stddef.h>
+#include <sys/time.h>
+#include <time.h>
 #include <unistd.h>
 
 /**
- * @brief Pauses the thread until the dongle cooldown expires.
+ * @brief Converts a timespec structure value into milliseconds.
  *
- * @param dongle Target dongle to wait for
+ * @param ts Target timespec structure to be converted
+ * @return The converted time in milliseconds
  */
-void	dongle_wait_cooldown(t_dongle *dongle)
+size_t	time_convert_timespec_to_ms(struct timespec *ts)
 {
-	size_t	ready_at;
+	size_t	milliseconds;
 
-	ready_at = dongle_get_ready_at(dongle);
-	if (ready_at > time_get_current_ms())
-		time_sleep_ms(ready_at - time_get_current_ms());
+	milliseconds = ((size_t)ts->tv_sec * 1000) + ((size_t)ts->tv_nsec
+			/ 1000000);
+	return (milliseconds);
 }

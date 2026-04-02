@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:50:04 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 15:15:15 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 13:41:43 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void				dongle_destroy(t_dongle **dongles, size_t count);
 
 // actions
 void				dongle_wait_cooldown(t_dongle *dongle);
-void				dongle_thread_unsafe_acquire(t_dongle *dongle);
-void				dongle_thread_safe_release(t_dongle *dongle);
+void				dongle_acquire_thread_unsafe(t_dongle *dongle);
+void				dongle_release_thread_safe(t_dongle *dongle);
 
 // states
 size_t				dongle_get_ready_at(t_dongle *dongle);

@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 20:00:30 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 17:54:36 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:24:47 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief Initializes a single dongle and its priority queue.
+ *
+ * @param dongle Target dongle structure to initialize
+ * @param cooldown Cooldown duration assigned to the dongle
+ * @return 0 on success, error code otherwise
+ */
 t_errcode	_dongle_init(t_dongle *dongle, int cooldown)
 {
 	t_errcode	errcode;
@@ -39,6 +46,13 @@ t_errcode	_dongle_init(t_dongle *dongle, int cooldown)
 	return (0);
 }
 
+/**
+ * @brief Allocates and initializes the full array of dongles.
+ *
+ * @param count Number of dongles to allocate
+ * @param cooldown Cooldown duration for each dongle
+ * @return Pointer to the allocated array or NULL on failure
+ */
 t_dongle	*dongle_create(size_t count, int cooldown)
 {
 	t_dongle	*dongles;

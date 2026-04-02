@@ -6,13 +6,18 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 17:57:15 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 09:10:45 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:06:03 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heapq.h"
 #include <stdlib.h>
 
+/**
+ * @brief Frees all allocated memory for the queue and its stored items.
+ *
+ * @param heapq Pointer to the priority queue to completely destroy
+ */
 void	heapq_destroy(t_heapq **heapq)
 {
 	int	i;

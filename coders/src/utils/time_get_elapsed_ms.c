@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dongle_action_wait.c                               :+:      :+:    :+:   */
+/*   time_get_elapsed_ms.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 13:12:41 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 14:24:09 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/04/02 13:35:08 by nlallema          #+#    #+#             */
+/*   Updated: 2026/04/02 14:26:16 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dongle.h"
 #include "utils.h"
+#include <stddef.h>
+#include <sys/time.h>
+#include <time.h>
 #include <unistd.h>
 
 /**
- * @brief Pauses the thread until the dongle cooldown expires.
+ * @brief Calculates the elapsed time in milliseconds since a timestamp.
  *
- * @param dongle Target dongle to wait for
+ * @param ts Starting timestamp to compare against the current time
+ * @return Elapsed time in milliseconds
  */
-void	dongle_wait_cooldown(t_dongle *dongle)
+size_t	time_get_elapsed_ms(struct timespec *ts)
 {
-	size_t	ready_at;
-
-	ready_at = dongle_get_ready_at(dongle);
-	if (ready_at > time_get_current_ms())
-		time_sleep_ms(ready_at - time_get_current_ms());
+	return (time_get_current_ms() - time_convert_timespec_to_ms(ts));
 }

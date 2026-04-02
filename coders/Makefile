@@ -36,21 +36,29 @@ SRCS =\
 	  $(SRC_DIR)/coder/coder_lifecycle_create.c\
 	  $(SRC_DIR)/coder/coder_lifecycle_destroy.c\
 	  $(SRC_DIR)/coder/coder_lifecycle_routine.c\
-	  $(SRC_DIR)/coder/coder_dongles_wait.c\
-	  $(SRC_DIR)/coder/coder_dongles_release.c\
+	  $(SRC_DIR)/coder/coder_dongle_wait.c\
+	  $(SRC_DIR)/coder/coder_dongle_release.c\
+	  $(SRC_DIR)/coder/coder_dongle_acquire.c\
 	  $(SRC_DIR)/coder/coder_action_sync.c\
-	  $(SRC_DIR)/coder/coder_action_die.c\
 	  $(SRC_DIR)/coder/coder_action_compile.c\
 	  $(SRC_DIR)/coder/coder_action_debug.c\
 	  $(SRC_DIR)/coder/coder_action_refactor.c\
+	  $(SRC_DIR)/coder/coder_action_log.c\
 	  $(SRC_DIR)/coder/coder_state_burnout.c\
 	  $(SRC_DIR)/coder/coder_state_priority.c\
+	  $(SRC_DIR)/coder/coder_state_running.c\
 	  $(SRC_DIR)/workspace/workspace_lifecycle_create.c\
 	  $(SRC_DIR)/workspace/workspace_lifecycle_destroy.c\
+	  $(SRC_DIR)/workspace/workspace_lifecycle_monitor.c\
 	  $(SRC_DIR)/workspace/workspace_thread_start.c\
 	  $(SRC_DIR)/workspace/workspace_thread_join.c\
-	  $(SRC_DIR)/utils/util_time.c\
-	  $(SRC_DIR)/utils/util_math.c\
+	  $(SRC_DIR)/utils/time_convert_timespec_to_ms.c\
+	  $(SRC_DIR)/utils/time_get_current_ms.c\
+	  $(SRC_DIR)/utils/time_get_elapsed_ms.c\
+	  $(SRC_DIR)/utils/time_set_abstimeout.c\
+	  $(SRC_DIR)/utils/time_sleep_ms.c\
+	  $(SRC_DIR)/utils/math_absmod.c\
+	  $(SRC_DIR)/arguments.c\
 	  $(SRC_DIR)/main.c\
 
 TEST_VERBOSE ?= 0

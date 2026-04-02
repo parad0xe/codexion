@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dongle_action_wait.c                               :+:      :+:    :+:   */
+/*   time_sleep_ms.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 13:12:41 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 14:24:09 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/04/02 13:35:21 by nlallema          #+#    #+#             */
+/*   Updated: 2026/04/02 14:27:04 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dongle.h"
 #include "utils.h"
+#include <stddef.h>
+#include <sys/time.h>
+#include <time.h>
 #include <unistd.h>
 
 /**
- * @brief Pauses the thread until the dongle cooldown expires.
+ * @brief Suspends execution using micro-pauses until duration is reached.
  *
- * @param dongle Target dongle to wait for
+ * @param ms Amount of milliseconds to sleep
  */
-void	dongle_wait_cooldown(t_dongle *dongle)
+void	time_sleep_ms(size_t ms)
 {
-	size_t	ready_at;
+	size_t	start;
 
-	ready_at = dongle_get_ready_at(dongle);
-	if (ready_at > time_get_current_ms())
-		time_sleep_ms(ready_at - time_get_current_ms());
+	start = time_get_current_ms();
+	while (time_get_current_ms() - start < ms)
+		usleep(500);
 }

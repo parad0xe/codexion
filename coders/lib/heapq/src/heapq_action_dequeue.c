@@ -6,13 +6,20 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 19:13:38 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 14:44:24 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:11:09 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heapq.h"
 #include <stdlib.h>
 
+/**
+ * @brief Attempts to swap current node with its highest priority child.
+ *
+ * @param heapq Target priority queue to sort
+ * @param index Pointer to the current node position
+ * @return 1 if a swap occurred, 0 otherwise
+ */
 static int	_heapq_heapify_down_try_swap(t_heapq *heapq, int *index)
 {
 	t_heapq_data	*current;
@@ -34,6 +41,11 @@ static int	_heapq_heapify_down_try_swap(t_heapq *heapq, int *index)
 	return (1);
 }
 
+/**
+ * @brief Restores the heap property by moving the root element down.
+ *
+ * @param heapq Target priority queue to sort
+ */
 static void	_heapq_heapify_down(t_heapq *heapq)
 {
 	int	current_idx;
@@ -56,6 +68,12 @@ static void	_heapq_heapify_down(t_heapq *heapq)
 		heapq->count -= 1;
 }
 
+/**
+ * @brief Removes and returns the highest priority item from the queue.
+ *
+ * @param heapq Target priority queue for extraction
+ * @return Pointer to the extracted data
+ */
 void	*heapq_dequeue(t_heapq *heapq)
 {
 	t_heapq_data	*heapq_data;

@@ -6,26 +6,28 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:03:12 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 15:41:33 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 12:28:26 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "coder.h"
+#include "codexion.h"
 #include "dongle.h"
 #include "test.h"
 #include <stddef.h>
 #include <string.h>
+#include <time.h>
 
-static void	_init_mock_args(t_args *args)
+static void	_init_mock_sim(t_sim_info *sim)
 {
-	args->number_of_coders = 2;
-	args->time_to_burnout = 100;
-	args->time_to_compile = 200;
-	args->time_to_debug = 300;
-	args->time_to_refactor = 400;
-	args->number_of_compiles = 5;
-	args->dongle_cooldown = 10;
-	args->scheduler = "fifo";
+	sim->args.number_of_coders = 2;
+	sim->args.time_to_burnout = 100;
+	sim->args.time_to_compile = 200;
+	sim->args.time_to_debug = 300;
+	sim->args.time_to_refactor = 400;
+	sim->args.number_of_compiles = 5;
+	sim->args.dongle_cooldown = 10;
+	sim->args.scheduler = "fifo";
 }
 
 static void	_test_coder_content(t_coder_array *coders, t_dongle *dongles,
@@ -46,24 +48,24 @@ static void	_test_coder_content(t_coder_array *coders, t_dongle *dongles,
 			% args->number_of_coders]);
 		custom_assert("handle start mutex linking",
 			coders->items[i].start_mutex == &coders->start_mutex);
-		custom_assert("handle scheduler policy setting",
-			strcmp(coders->items[i].scheduler, "fifo") == 0);
+		custom_assert("handle running mutex init",
+			coders->items[i].is_running_mutex_init == 1);
 		i++;
 	}
 }
 
 static void	_test_single_coder(void)
 {
-	t_args			args;
+	t_sim_info		sim;
 	t_dongle		*dongles;
 	t_coder_array	*coders;
 
 	test_group("test single coder creation");
-	_init_mock_args(&args);
-	args.number_of_coders = 1;
-	dongles = dongle_create(1, args.dongle_cooldown);
+	_init_mock_sim(&sim);
+	sim.args.number_of_coders = 1;
+	dongles = dongle_create(1, sim.args.dongle_cooldown);
 	assert_is_not_null("handle test dongles creation", dongles);
-	coders = coder_create(&args, dongles);
+	coders = coder_create(&sim, dongles);
 	assert_is_null("handle right dongle when alone (null)",
 		coders->items[0].right_dongle);
 	coder_destroy(&coders);
@@ -72,38 +74,40 @@ static void	_test_single_coder(void)
 
 static void	_test_multiple_coder(void)
 {
-	t_args			args;
+	t_sim_info		sim;
 	t_dongle		*dongles;
 	t_coder_array	*coders;
+	struct timespec	ts;
 
 	test_group("test multiple coder creation");
-	_init_mock_args(&args);
-	dongles = dongle_create(args.number_of_coders, args.dongle_cooldown);
+	_init_mock_sim(&sim);
+	dongles = dongle_create(sim.args.number_of_coders,
+			sim.args.dongle_cooldown);
 	assert_is_not_null("handle test dongles creation", dongles);
-	args.scheduler = "nop";
-	assert_is_null("handle invalid scheduler", coder_create(&args, dongles));
-	_init_mock_args(&args);
-	coders = coder_create(&args, dongles);
+	sim.args.scheduler = "nop";
+	assert_is_null("handle invalid scheduler", coder_create(&sim, dongles));
+	_init_mock_sim(&sim);
+	coders = coder_create(&sim, dongles);
 	assert_is_not_null("handle coders array creation", coders);
 	custom_assert("handle start mutex init", coders->start_mutex_init == 1);
 	custom_assert("handle start cond init", coders->start_cond_init == 1);
 	custom_assert("handle expected coder count",
-		coders->count == args.number_of_coders);
-	_test_coder_content(coders, dongles, &args);
+		coders->count == sim.args.number_of_coders);
+	_test_coder_content(coders, dongles, &sim.args);
 	dongle_destroy(&dongles, coders->count);
 	coder_destroy(&coders);
 }
 
 int	main(void)
 {
-	t_args		args;
+	t_sim_info	sim;
 	t_dongle	dongles;
 
 	_test_single_coder();
 	_test_multiple_coder();
 	test_group("test null parameters");
 	assert_is_null("handle null args pointer", coder_create(NULL, &dongles));
-	assert_is_null("handle null dongles pointer", coder_create(&args, NULL));
+	assert_is_null("handle null dongles pointer", coder_create(&sim, NULL));
 	assert_is_null("handle both null pointers", coder_create(NULL, NULL));
 	return (0);
 }

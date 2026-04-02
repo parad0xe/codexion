@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_math.c                                        :+:      :+:    :+:   */
+/*   time_get_current_ms.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 14:19:43 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 13:30:23 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/04/02 13:35:01 by nlallema          #+#    #+#             */
+/*   Updated: 2026/04/02 14:26:31 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	math_absmod(int n, int mod)
-{
-	int	remainder;
+#include "utils.h"
+#include <stddef.h>
+#include <sys/time.h>
+#include <time.h>
+#include <unistd.h>
 
-	remainder = n % mod;
-	if (remainder < 0)
-		return (remainder + mod);
-	return (remainder);
+/**
+ * @brief Retrieves the current system time converted into milliseconds.
+ *
+ * @return Current timestamp in milliseconds
+ */
+size_t	time_get_current_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((size_t)tv.tv_sec * 1000 + (size_t)tv.tv_usec / 1000);
 }

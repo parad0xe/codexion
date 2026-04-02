@@ -6,13 +6,18 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:11:35 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 15:14:43 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:24:00 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dongle.h"
 
-void	dongle_thread_unsafe_acquire(t_dongle *dongle)
+/**
+ * @brief Marks the dongle as unavailable without thread locking.
+ *
+ * @param dongle Target dongle to be acquired
+ */
+void	dongle_acquire_thread_unsafe(t_dongle *dongle)
 {
 	dongle->is_available = 0;
 }

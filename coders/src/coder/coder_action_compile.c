@@ -6,18 +6,25 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 12:03:46 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 13:55:00 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:14:34 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "coder.h"
 #include "utils.h"
-#include <stdio.h>
 #include <unistd.h>
 
+/**
+ * @brief Executes the compilation action and resets the burnout timer.
+ *
+ * @param coder Entity executing the compilation action
+ */
 void	coder_compile(t_coder *coder)
 {
-	printf("coder %d acquire dongles\n", coder->id);
-	time_set_abstimeout(&coder->burnout_at, coder->time_to_burnout);
-	usleep(coder->time_to_compile * 1000);
+	if (!coder_is_running_thread_safe(coder))
+		return ;
+	coder_log_thread_safe(coder, "is compiling", LOG_IF_RUNNING);
+	time_set_abstimeout(&coder->burnout_at, coder->sim->args.time_to_burnout);
+	coder->compilation_count += 1;
+	time_sleep_ms(coder->sim->args.time_to_compile);
 }
