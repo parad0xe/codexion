@@ -6,10 +6,11 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 14:07:03 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 13:50:53 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 11:08:30 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "utils.h"
 #include <stddef.h>
 #include <sys/time.h>
 #include <time.h>
@@ -26,6 +27,11 @@ size_t	time_get_current_ms(void)
 
 	gettimeofday(&tv, NULL);
 	return ((size_t)tv.tv_sec * 1000 + (size_t)tv.tv_usec / 1000);
+}
+
+size_t	time_get_elapsed_ms(struct timespec *ts)
+{
+	return (time_get_current_ms() - time_convert_timespec_to_ms(ts));
 }
 
 void	time_set_abstimeout(struct timespec *ts, size_t timeout)

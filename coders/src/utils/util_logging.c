@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coder_action_die.c                                 :+:      :+:    :+:   */
+/*   util_logging.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 12:00:17 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 12:00:42 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/04/02 11:09:32 by nlallema          #+#    #+#             */
+/*   Updated: 2026/04/02 12:04:13 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "coder.h"
+#include "utils.h"
+#include <pthread.h>
 #include <stdio.h>
-#include <stdlib.h>
 
-void	coder_die(t_coder *coder)
+void	log_thread_safe(t_coder *coder, char *message,
+		int require_running_coder)
 {
-	printf("coder %d BURNOUT\n", coder->id);
-	exit(1);
+	pthread_mutex_lock(&coder->sim->log_mutex);
+	if (!require_running_coder || coder_is_running_thread_safe(coder))
+	{
+		printf("%zu %d %s\n", time_get_elapsed_ms(&coder->sim->started_at),
+			coder->id, message);
+	}
+	pthread_mutex_unlock(&coder->sim->log_mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 00:45:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/01 13:35:17 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 12:12:18 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	*coder_routine(void *thread_args)
 		}
 		else
 			break ;
-		coder->number_of_compiles += 1;
 		i++;
 	}
 	return (NULL);

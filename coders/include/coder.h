@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:49:16 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/01 13:34:34 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 12:11:32 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,15 @@ typedef struct s_coder
 {
 	int				id;
 	pthread_t		tid;
+	t_sim_info		*sim;
 	int				*can_start;
 	pthread_cond_t	*start_cond;
 	pthread_mutex_t	*start_mutex;
+	int				is_running;
 	pthread_mutex_t	is_running_mutex;
 	int				is_running_mutex_init;
-	int				is_running;
-	size_t			time_to_burnout;
-	size_t			time_to_compile;
-	size_t			time_to_debug;
-	size_t			time_to_refactor;
-	size_t			number_of_compiles;
+	size_t			compilation_count;
 	struct timespec	burnout_at;
-	char			*scheduler;
 	t_dongle		*left_dongle;
 	t_dongle		*right_dongle;
 }					t_coder;
@@ -51,7 +47,7 @@ typedef struct s_coder_array
 }					t_coder_array;
 
 // lifecycle
-t_coder_array		*coder_create(t_args *args, t_dongle *dongles);
+t_coder_array		*coder_create(t_sim_info *sim, t_dongle *dongles);
 void				coder_destroy(t_coder_array **coders);
 void				*coder_routine(void *thread_args);
 
@@ -62,7 +58,6 @@ void				coder_dongles_acquire_thread_unsafe(t_coder *coder);
 
 // actions
 void				coder_sync(t_coder *coder);
-void				coder_die(t_coder *coder);
 void				coder_compile(t_coder *coder);
 void				coder_debug(t_coder *coder);
 void				coder_refactor(t_coder *coder);

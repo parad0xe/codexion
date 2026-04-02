@@ -6,12 +6,12 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 12:06:53 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/01 17:01:27 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 12:38:22 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "coder.h"
-#include <stdio.h>
+#include "utils.h"
 #include <unistd.h>
 
 // create difference between fifo and edf on powerful pc
@@ -20,6 +20,6 @@ void	coder_refactor(t_coder *coder)
 {
 	if (!coder_is_running_thread_safe(coder))
 		return ;
-	printf("coder %d refactoring..\n", coder->id);
-	usleep(coder->time_to_refactor * 1000);
+	log_thread_safe(coder, "is refactoring", LOG_IF_RUNNING);
+	usleep(coder->sim->args.time_to_refactor * 1000);
 }

@@ -6,10 +6,11 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 01:12:33 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/01 13:00:53 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 12:01:46 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "utils.h"
 #include "workspace.h"
 #include <pthread.h>
 
@@ -17,6 +18,7 @@ void	workspace_thread_start(t_workspace *workspace)
 {
 	size_t	i;
 
+	time_set_abstimeout(&workspace->sim->started_at, 0);
 	pthread_create(&workspace->thread_monitor_id, NULL, &workspace_monitor,
 		workspace);
 	i = 0;

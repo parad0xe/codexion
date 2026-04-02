@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 11:51:31 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/01 16:23:41 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 11:48:06 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	coder_dongles_wait(t_coder *coder)
 	first = coder->left_dongle;
 	second = coder->right_dongle;
 	if (second == NULL)
-		time_sleep_ms(coder->time_to_burnout);
+		time_sleep_ms(coder->sim->args.time_to_burnout);
 	if (second == NULL)
 		return (0);
 	if (coder->id % 2 != 0)
