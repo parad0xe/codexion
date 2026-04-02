@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:49:16 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 12:52:44 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 13:26:00 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "dongle.h"
 # include <pthread.h>
 # include <time.h>
+
+# define LOG_ALWAYS 0
+# define LOG_IF_RUNNING 1
 
 typedef struct s_coder
 {
@@ -61,6 +64,8 @@ void				coder_sync(t_coder *coder);
 void				coder_compile(t_coder *coder);
 void				coder_debug(t_coder *coder);
 void				coder_refactor(t_coder *coder);
+void				coder_log_thread_safe(t_coder *coder, char *message,
+						int check_running);
 
 // state
 int					coder_has_burnout(t_coder *coder);

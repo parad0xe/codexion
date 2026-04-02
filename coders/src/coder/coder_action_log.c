@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dongle_action_release.c                            :+:      :+:    :+:   */
+/*   coder_action_log.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 15:14:17 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:40:27 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/04/02 13:24:41 by nlallema          #+#    #+#             */
+/*   Updated: 2026/04/02 13:25:30 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dongle.h"
+#include "coder.h"
 #include "utils.h"
 #include <pthread.h>
+#include <stdio.h>
 
-void	dongle_release_thread_safe(t_dongle *dongle)
+void	coder_log_thread_safe(t_coder *coder, char *message,
+		int require_running_coder)
 {
-	pthread_mutex_lock(&dongle->access_mutex);
-	dongle->is_available = 1;
-	time_set_abstimeout(&dongle->available_at, dongle->cooldown);
-	pthread_mutex_unlock(&dongle->access_mutex);
-	pthread_cond_broadcast(&dongle->access_cond);
+	pthread_mutex_lock(&coder->sim->log_mutex);
+	if (!require_running_coder || coder_is_running_thread_safe(coder))
+	{
+		printf("%zu %d %s\n", time_get_elapsed_ms(&coder->sim->started_at),
+			coder->id, message);
+	}
+	pthread_mutex_unlock(&coder->sim->log_mutex);
 }

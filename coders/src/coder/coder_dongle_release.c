@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 14:15:07 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 12:53:02 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 13:41:21 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 void	coder_dongle_release(t_coder *coder)
 {
-	dongle_thread_safe_release(coder->left_dongle);
-	dongle_thread_safe_release(coder->right_dongle);
+	dongle_release_thread_safe(coder->left_dongle);
+	dongle_release_thread_safe(coder->right_dongle);
 }

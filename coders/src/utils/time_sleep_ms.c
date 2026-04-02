@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_logging.c                                     :+:      :+:    :+:   */
+/*   time_sleep_ms.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/02 11:09:32 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 12:04:13 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/04/02 13:35:21 by nlallema          #+#    #+#             */
+/*   Updated: 2026/04/02 13:36:20 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coder.h"
 #include "utils.h"
-#include <pthread.h>
-#include <stdio.h>
+#include <stddef.h>
+#include <sys/time.h>
+#include <time.h>
+#include <unistd.h>
 
-void	log_thread_safe(t_coder *coder, char *message,
-		int require_running_coder)
+void	time_sleep_ms(size_t ms)
 {
-	pthread_mutex_lock(&coder->sim->log_mutex);
-	if (!require_running_coder || coder_is_running_thread_safe(coder))
-	{
-		printf("%zu %d %s\n", time_get_elapsed_ms(&coder->sim->started_at),
-			coder->id, message);
-	}
-	pthread_mutex_unlock(&coder->sim->log_mutex);
+	size_t	start;
+
+	start = time_get_current_ms();
+	while (time_get_current_ms() - start < ms)
+		usleep(500);
 }

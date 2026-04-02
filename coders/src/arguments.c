@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 12:56:26 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:02:09 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 13:15:20 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	args_parse(t_args *args, int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	args->number_of_coders = 3;
+	args->number_of_coders = 5;
 	args->time_to_burnout = 184;
 	args->time_to_compile = 50;
 	args->time_to_debug = 30;

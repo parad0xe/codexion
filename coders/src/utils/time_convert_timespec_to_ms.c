@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dongle_action_acquire.c                            :+:      :+:    :+:   */
+/*   time_convert_timespec_to_ms.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 15:11:35 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:39:49 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/04/02 13:34:21 by nlallema          #+#    #+#             */
+/*   Updated: 2026/04/02 13:34:55 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dongle.h"
+#include "utils.h"
+#include <stddef.h>
+#include <sys/time.h>
+#include <time.h>
+#include <unistd.h>
 
-void	dongle_acquire_thread_unsafe(t_dongle *dongle)
+size_t	time_convert_timespec_to_ms(struct timespec *ts)
 {
-	dongle->is_available = 0;
+	size_t	milliseconds;
+
+	milliseconds = ((size_t)ts->tv_sec * 1000) + ((size_t)ts->tv_nsec
+			/ 1000000);
+	return (milliseconds);
 }

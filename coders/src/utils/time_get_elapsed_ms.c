@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_math.c                                        :+:      :+:    :+:   */
+/*   time_get_elapsed_ms.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 14:19:43 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 13:30:23 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/04/02 13:35:08 by nlallema          #+#    #+#             */
+/*   Updated: 2026/04/02 13:35:57 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	math_absmod(int n, int mod)
-{
-	int	remainder;
+#include "utils.h"
+#include <stddef.h>
+#include <sys/time.h>
+#include <time.h>
+#include <unistd.h>
 
-	remainder = n % mod;
-	if (remainder < 0)
-		return (remainder + mod);
-	return (remainder);
+size_t	time_get_elapsed_ms(struct timespec *ts)
+{
+	return (time_get_current_ms() - time_convert_timespec_to_ms(ts));
 }

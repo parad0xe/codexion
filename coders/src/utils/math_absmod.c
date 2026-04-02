@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dongle_action_acquire.c                            :+:      :+:    :+:   */
+/*   math_absmod.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 15:11:35 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:39:49 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/03/25 14:19:43 by nlallema          #+#    #+#             */
+/*   Updated: 2026/03/30 13:30:23 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dongle.h"
-
-void	dongle_acquire_thread_unsafe(t_dongle *dongle)
+int	math_absmod(int n, int mod)
 {
-	dongle->is_available = 0;
+	int	remainder;
+
+	remainder = n % mod;
+	if (remainder < 0)
+		return (remainder + mod);
+	return (remainder);
 }

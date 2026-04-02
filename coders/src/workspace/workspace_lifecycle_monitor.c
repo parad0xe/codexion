@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 11:20:37 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 12:03:17 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 13:27:59 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	_stop_on_any_burnout(t_workspace *ws)
 		if (coder_has_burnout(coder))
 		{
 			_stop_coders(ws);
-			log_thread_safe(coder, "burn out", LOG_ALWAYS);
+			coder_log_thread_safe(coder, "burn out", LOG_ALWAYS);
 			return (1);
 		}
 		i++;
