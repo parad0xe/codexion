@@ -1,0 +1,69 @@
+name: Codexion CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  norminette:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./coders
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-pip
+        python3 -m pip install norminette
+
+    - name: Run norminette
+      run: norminette
+
+  unit-tests:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./coders
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc make valgrind
+
+    - name: Run tests
+      run: make tests
+
+    - name: Run tests + valgrind
+      run: make check-tests
+
+  strict-compilation:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./coders
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc make
+
+    - name: Make compilation with strict flags
+      run: make
