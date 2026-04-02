@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 10:35:30 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 11:41:31 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 13:01:51 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,8 @@ typedef struct s_sim_info
 	pthread_mutex_t	log_mutex;
 	int				log_mutex_init;
 }					t_sim_info;
+
+void				args_debug(t_args args);
+int					args_parse(t_args *args, int argc, char **argv);
 
 #endif

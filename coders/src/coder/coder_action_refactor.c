@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 12:06:53 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 12:38:22 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 12:50:28 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ void	coder_refactor(t_coder *coder)
 	if (!coder_is_running_thread_safe(coder))
 		return ;
 	log_thread_safe(coder, "is refactoring", LOG_IF_RUNNING);
-	usleep(coder->sim->args.time_to_refactor * 1000);
+	time_sleep_ms(coder->sim->args.time_to_refactor);
 }

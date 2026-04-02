@@ -36,9 +36,9 @@ SRCS =\
 	  $(SRC_DIR)/coder/coder_lifecycle_create.c\
 	  $(SRC_DIR)/coder/coder_lifecycle_destroy.c\
 	  $(SRC_DIR)/coder/coder_lifecycle_routine.c\
-	  $(SRC_DIR)/coder/coder_dongles_wait.c\
-	  $(SRC_DIR)/coder/coder_dongles_release.c\
-	  $(SRC_DIR)/coder/coder_dongles_acquire.c\
+	  $(SRC_DIR)/coder/coder_dongle_wait.c\
+	  $(SRC_DIR)/coder/coder_dongle_release.c\
+	  $(SRC_DIR)/coder/coder_dongle_acquire.c\
 	  $(SRC_DIR)/coder/coder_action_sync.c\
 	  $(SRC_DIR)/coder/coder_action_compile.c\
 	  $(SRC_DIR)/coder/coder_action_debug.c\
@@ -54,6 +54,7 @@ SRCS =\
 	  $(SRC_DIR)/utils/util_time.c\
 	  $(SRC_DIR)/utils/util_math.c\
 	  $(SRC_DIR)/utils/util_logging.c\
+	  $(SRC_DIR)/arguments.c\
 	  $(SRC_DIR)/main.c\
 
 TEST_VERBOSE ?= 0

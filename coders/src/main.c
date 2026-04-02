@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 15:03:21 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 12:37:22 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 13:01:39 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,14 @@
 #include "utils.h"
 #include "workspace.h"
 #include <pthread.h>
-#include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 
-void	debug_args(t_args args)
-{
-	printf("---- debug args ----\n");
-	printf("number_of_coders   : %ld\n", args.number_of_coders);
-	printf("time_to_burnout    : %ld\n", args.time_to_burnout);
-	printf("time_to_compile    : %ld\n", args.time_to_compile);
-	printf("time_to_debug      : %ld\n", args.time_to_debug);
-	printf("time_to_refactor   : %ld\n", args.time_to_refactor);
-	printf("number_of_compiles : %ld\n", args.number_of_compiles);
-	printf("dongle_cooldown    : %ld\n", args.dongle_cooldown);
-	printf("scheduler          : %s\n", args.scheduler);
-	printf("--------------------\n");
-}
-
-int	parse_args(t_args *args)
-{
-	args->number_of_coders = 3;
-	args->time_to_burnout = 184;
-	args->time_to_compile = 50;
-	args->time_to_debug = 30;
-	args->time_to_refactor = 20;
-	args->number_of_compiles = 2;
-	args->dongle_cooldown = 10;
-	args->scheduler = "fifo";
-	return (0);
-}
-
-t_errcode	init_sim(t_sim_info *sim)
+t_errcode	simulation_init(t_sim_info *sim, int argc, char **argv)
 {
 	t_errcode	errcode;
 
-	parse_args(&sim->args);
+	args_parse(&sim->args, argc, argv);
 	errcode = pthread_mutex_init(&sim->log_mutex, NULL);
 	if (errcode != 0)
 		return (ERR_MUTEX_INIT);
@@ -58,7 +30,7 @@ t_errcode	init_sim(t_sim_info *sim)
 	return (0);
 }
 
-int	stop(t_sim_info *sim, t_workspace *workspace, int errcode)
+t_errcode	stop(t_sim_info *sim, t_workspace *workspace, int errcode)
 {
 	char	*message;
 
@@ -77,10 +49,11 @@ int	main(int argc, char **argv)
 {
 	t_sim_info	sim;
 	t_workspace	*workspace;
+	t_errcode	errcode;
 
-	(void)argc;
-	(void)argv;
-	init_sim(&sim);
+	errcode = simulation_init(&sim, argc, argv);
+	if (errcode != 0)
+		return (errcode);
 	if (sim.args.number_of_compiles == 0)
 		return (stop(&sim, NULL, 0));
 	workspace = workspace_create(&sim);

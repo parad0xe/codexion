@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coder_dongles_acquire.c                            :+:      :+:    :+:   */
+/*   coder_dongle_acquire.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 13:28:00 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 12:06:16 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 12:52:33 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "coder.h"
 #include "utils.h"
 
-void	coder_dongles_acquire_thread_unsafe(t_coder *coder)
+void	coder_dongle_acquire_thread_unsafe(t_coder *coder)
 {
 	if (coder_is_running_thread_safe(coder))
 	{

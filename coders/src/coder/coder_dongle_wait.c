@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coder_dongles_wait.c                               :+:      :+:    :+:   */
+/*   coder_dongle_wait.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 11:51:31 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 11:48:06 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 12:53:20 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	_attempt_acquire(t_coder *coder, t_dongle *first, t_dongle *second)
 	if (_can_acquire_dongle(coder, first) && _can_acquire_dongle(coder, second))
 	{
 		_dequeue_both_thread_unsafe(coder, first, second);
-		coder_dongles_acquire_thread_unsafe(coder);
+		coder_dongle_acquire_thread_unsafe(coder);
 		pthread_mutex_unlock(&second->access_mutex);
 		pthread_mutex_unlock(&first->access_mutex);
 		return (coder_is_running_thread_safe(coder));
@@ -81,7 +81,7 @@ static int	_attempt_acquire(t_coder *coder, t_dongle *first, t_dongle *second)
 	return (0);
 }
 
-int	coder_dongles_wait(t_coder *coder)
+int	coder_dongle_wait(t_coder *coder)
 {
 	t_dongle	*first;
 	t_dongle	*second;
