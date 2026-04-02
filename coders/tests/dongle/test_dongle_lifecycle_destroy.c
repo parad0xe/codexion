@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 18:41:10 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 22:04:29 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 23:04:35 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	_test_dongle_destroy(void)
 {
 	t_sim_info	sim;
 	t_dongle	*dongles;
-	size_t		size;
 
 	_init_mock_sim(&sim);
 	test_group("test dongles destroy");

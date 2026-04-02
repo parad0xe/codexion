@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 17:03:12 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 22:01:26 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 23:04:50 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ static void	_test_multiple_coder(void)
 	t_sim_info		sim;
 	t_dongle		*dongles;
 	t_coder_array	*coders;
-	struct timespec	ts;
 
 	test_group("test multiple coder creation");
 	_init_mock_sim(&sim);
