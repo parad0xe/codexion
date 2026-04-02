@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 16:45:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 14:22:33 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 18:19:48 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_errcode	_coder_init(t_coder *coder, int index, t_sim_info *sim,
 	if (sim->args.number_of_coders > 1)
 		coder->right_dongle = &dongles[right_dongle_index];
 	if (pthread_mutex_init(&coder->is_running_mutex, NULL) != 0)
-		return (ERR_MUTEX_INIT);
+		return (ERR_CODER_MUTEX_INIT);
 	coder->is_running_mutex_init = 1;
 	coder->is_running = 1;
 	time_set_abstimeout(&coder->burnout_at, sim->args.time_to_burnout);
@@ -64,10 +64,10 @@ static t_errcode	_coders_init(t_coder_array *coders, t_sim_info *sim,
 
 	coders->count = 0;
 	if (pthread_mutex_init(&coders->start_mutex, NULL) != 0)
-		return (ERR_MUTEX_INIT);
+		return (ERR_CODER_MUTEX_INIT);
 	coders->start_mutex_init = 1;
 	if (pthread_cond_init(&coders->start_cond, NULL) != 0)
-		return (ERR_COND_INIT);
+		return (ERR_CODER_COND_INIT);
 	coders->start_cond_init = 1;
 	i = 0;
 	while (i < sim->args.number_of_coders)
@@ -98,20 +98,22 @@ t_coder_array	*coder_create(t_sim_info *sim, t_dongle *dongles)
 
 	if (sim == NULL || dongles == NULL)
 		return (NULL);
-	if (strcmp(sim->args.scheduler, "fifo") != 0
-		&& strcmp(sim->args.scheduler, "edf") != 0)
-		return (NULL);
 	coders = malloc(sizeof(t_coder_array));
 	if (coders == NULL)
+	{
+		sim->errcode = ERR_CODER_MALLOC;
 		return (NULL);
+	}
 	memset(coders, 0, sizeof(t_coder_array));
 	coders->items = malloc(sizeof(t_coder) * sim->args.number_of_coders);
 	if (coders->items == NULL)
 	{
+		sim->errcode = ERR_CODER_ITEMS_MALLOC;
 		coder_destroy(&coders);
 		return (NULL);
 	}
-	if (_coders_init(coders, sim, dongles) != 0)
+	sim->errcode = _coders_init(coders, sim, dongles);
+	if (sim->errcode != 0)
 	{
 		coder_destroy(&coders);
 		return (NULL);

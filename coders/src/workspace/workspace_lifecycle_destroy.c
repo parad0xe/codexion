@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:10:12 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 14:29:56 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 17:15:39 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	workspace_destroy(t_workspace **workspace)
 		return ;
 	if ((*workspace)->dongles != NULL)
 		dongle_destroy(&(*workspace)->dongles,
-			(*workspace)->coders->count);
+			(*workspace)->sim->args.number_of_coders);
 	if ((*workspace)->coders != NULL)
 		coder_destroy(&(*workspace)->coders);
 	free(*workspace);

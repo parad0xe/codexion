@@ -58,6 +58,14 @@ SRCS =\
 	  $(SRC_DIR)/utils/time_set_abstimeout.c\
 	  $(SRC_DIR)/utils/time_sleep_ms.c\
 	  $(SRC_DIR)/utils/math_absmod.c\
+	  $(SRC_DIR)/exceptions/exception.c\
+	  $(SRC_DIR)/exceptions/exception_sys.c\
+	  $(SRC_DIR)/exceptions/exception_args.c\
+	  $(SRC_DIR)/exceptions/exception_dongle.c\
+	  $(SRC_DIR)/exceptions/exception_coder.c\
+	  $(SRC_DIR)/exceptions/exception_workspace.c\
+	  $(SRC_DIR)/exceptions/exception_sim.c\
+	  $(SRC_DIR)/exceptions/exception_heapq.c\
 	  $(SRC_DIR)/arguments.c\
 	  $(SRC_DIR)/main.c\
 

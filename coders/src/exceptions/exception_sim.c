@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coder_action_refactor.c                            :+:      :+:    :+:   */
+/*   exception_sim.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 12:06:53 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 16:33:49 by nlallema         ###   ########lyon.fr   */
+/*   Created: 2026/04/02 18:17:17 by nlallema          #+#    #+#             */
+/*   Updated: 2026/04/02 22:00:39 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coder.h"
-#include "utils.h"
-#include <unistd.h>
+#include "codexion.h"
+#include <stdio.h>
 
 /**
- * @brief Puts the coder in a refactoring state for a specified duration.
+ * @brief Prints error messages strictly for the global simulation state.
  *
- * @param coder Entity executing the refactoring action
+ * @param errcode The specific error code to evaluate and print
  */
-void	coder_refactor(t_coder *coder)
+void	exception_sim(t_errcode errcode)
 {
-	if (!coder_is_running_thread_safe(coder))
-		return ;
-	coder_log_thread_safe(coder, "is refactoring", LOG_IF_RUNNING);
-	time_sleep_ms(coder->sim->args.time_to_refactor);
+	if (errcode == ERR_SIM_MUTEX_INIT)
+		fprintf(stderr, "exception: sim mutex init failed\n");
+	else
+		fprintf(stderr, "exception: unknown sim error code %d\n", errcode);
 }
