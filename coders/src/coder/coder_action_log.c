@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 13:24:41 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:25:30 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:15:38 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 #include <pthread.h>
 #include <stdio.h>
 
+/**
+ * @brief Prints a formatted message strictly maintaining chronological order.
+ *
+ * @param coder Entity executing the action
+ * @param message Action description to be printed
+ * @param require_running_coder Flag to enforce running state verification
+ */
 void	coder_log_thread_safe(t_coder *coder, char *message,
 		int require_running_coder)
 {

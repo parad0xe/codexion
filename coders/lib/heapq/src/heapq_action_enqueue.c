@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:06:39 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 14:38:15 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:09:45 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief Allocates and initializes a new heap node.
+ *
+ * @param data Generic pointer to the item to store
+ * @param priority Weight value used to sort the queue
+ * @return Pointer to the allocated node or NULL
+ */
 static t_heapq_data	*_heapq_create_data(void *data, size_t priority)
 {
 	t_heapq_data	*heapq_data;
@@ -27,6 +34,12 @@ static t_heapq_data	*_heapq_create_data(void *data, size_t priority)
 	return (heapq_data);
 }
 
+/**
+ * @brief Doubles the capacity of the heap array.
+ *
+ * @param heapq Target priority queue to expand
+ * @return 0 on success, error code otherwise
+ */
 static t_errcode	_heapq_more_space(t_heapq *heapq)
 {
 	t_heapq_data	**new_queue;
@@ -46,6 +59,12 @@ static t_errcode	_heapq_more_space(t_heapq *heapq)
 	return (0);
 }
 
+/**
+ * @brief Checks capacity and expands the array if necessary.
+ *
+ * @param heapq Target priority queue to check
+ * @return 0 on success, error code otherwise
+ */
 static t_errcode	_heapq_ensure_has_capacity(t_heapq *heapq)
 {
 	if (heapq->count + 1 > heapq->capacity)
@@ -53,6 +72,11 @@ static t_errcode	_heapq_ensure_has_capacity(t_heapq *heapq)
 	return (0);
 }
 
+/**
+ * @brief Restores the heap property by moving the last element up.
+ *
+ * @param heapq Target priority queue to sort
+ */
 static void	_heapq_heapify_up(t_heapq *heapq)
 {
 	int				i;
@@ -77,6 +101,16 @@ static void	_heapq_heapify_up(t_heapq *heapq)
 	}
 }
 
+/**
+ * @brief Inserts new data into the priority queue and restores heap order.
+ *
+ * The element with the lowest priority value has the highest priority.
+ *
+ * @param heapq Target priority queue for insertion
+ * @param data Generic pointer to the item to store
+ * @param priority Weight value used to sort the queue
+ * @return 0 on success, error code otherwise
+ */
 t_errcode	heapq_enqueue(t_heapq *heapq, void *data, size_t priority)
 {
 	int				errcode;

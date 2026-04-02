@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 11:20:37 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:27:59 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:32:14 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 #include "utils.h"
 #include "workspace.h"
 #include <stdio.h>
+#include <unistd.h>
 
+/**
+ * @brief Safely updates the running state of all coders to false.
+ *
+ * @param ws Workspace containing the coders to stop
+ */
 void	_stop_coders(t_workspace *ws)
 {
 	unsigned int	i;
@@ -29,6 +35,12 @@ void	_stop_coders(t_workspace *ws)
 	}
 }
 
+/**
+ * @brief Checks for any burnout and stops all coders if one occurred.
+ *
+ * @param ws Workspace containing the coders to evaluate
+ * @return 1 if a burnout was detected, 0 otherwise
+ */
 static int	_stop_on_any_burnout(t_workspace *ws)
 {
 	unsigned int	i;
@@ -49,6 +61,12 @@ static int	_stop_on_any_burnout(t_workspace *ws)
 	return (0);
 }
 
+/**
+ * @brief Stops the simulation if all coders reached the compile goal.
+ *
+ * @param ws Workspace containing the coders to evaluate
+ * @return 1 if all coders have finished, 0 otherwise
+ */
 static int	_stop_on_all_finished(t_workspace *ws)
 {
 	unsigned int	i;
@@ -72,6 +90,12 @@ static int	_stop_on_all_finished(t_workspace *ws)
 	return (0);
 }
 
+/**
+ * @brief Main monitoring loop checking for burnouts or completion.
+ *
+ * @param thread_arg Generic pointer to the workspace structure
+ * @return NULL upon completion
+ */
 void	*workspace_monitor(void *thread_arg)
 {
 	t_workspace	*ws;
@@ -83,7 +107,7 @@ void	*workspace_monitor(void *thread_arg)
 			break ;
 		if (_stop_on_all_finished(ws))
 			break ;
-		time_sleep_ms(1);
+		usleep(500);
 	}
 	return (NULL);
 }

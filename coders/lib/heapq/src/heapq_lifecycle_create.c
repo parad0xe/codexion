@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 17:54:21 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/28 09:10:18 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:05:36 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief Initializes and allocates a new empty priority queue.
+ *
+ * @return Pointer to the newly created priority queue
+ */
 t_heapq	*heapq_create(void)
 {
 	t_heapq	*heapq;

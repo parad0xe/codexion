@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:05:34 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 12:23:37 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:28:27 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief Initializes the workspace and allocates its internal arrays.
+ *
+ * @param ws Target workspace structure to initialize
+ * @param sim Global simulation information and configuration
+ * @return 0 on success, error code otherwise
+ */
 static t_errcode	_workspace_init(t_workspace *ws, t_sim_info *sim)
 {
 	ws->sim = sim;
@@ -31,6 +38,12 @@ static t_errcode	_workspace_init(t_workspace *ws, t_sim_info *sim)
 	return (0);
 }
 
+/**
+ * @brief Allocates and initializes the complete simulation workspace.
+ *
+ * @param sim Global simulation information and configuration
+ * @return Pointer to the allocated workspace, or NULL on failure
+ */
 t_workspace	*workspace_create(t_sim_info *sim)
 {
 	t_workspace	*workspace;

@@ -6,13 +6,20 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 19:04:55 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 14:45:53 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:11:55 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heapq.h"
 #include <stdio.h>
 
+/**
+ * @brief Recursively prints the heap tree nodes with indentation.
+ *
+ * @param heapq Target priority queue to visualize
+ * @param index Current node position in the array
+ * @param depth Current depth level for indentation
+ */
 static void	_heapq_print_tree(t_heapq *heapq, int index, int depth)
 {
 	int	indent;
@@ -32,6 +39,11 @@ static void	_heapq_print_tree(t_heapq *heapq, int index, int depth)
 	_heapq_print_tree(heapq, left_index, depth + 1);
 }
 
+/**
+ * @brief Prints a visual representation of the heap tree to standard output.
+ *
+ * @param heapq Priority queue to visualize
+ */
 void	heapq_debug(t_heapq *heapq)
 {
 	if (!heapq)

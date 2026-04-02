@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 13:35:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:36:10 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:26:09 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 #include <time.h>
 #include <unistd.h>
 
+/**
+ * @brief Computes an absolute timeout in the future from current time.
+ *
+ * @param ts Target timespec structure to be updated
+ * @param timeout Amount of milliseconds to add to the current time
+ */
 void	time_set_abstimeout(struct timespec *ts, size_t timeout)
 {
 	struct timeval	tv;

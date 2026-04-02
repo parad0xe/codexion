@@ -6,13 +6,18 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 12:56:26 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:15:20 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:35:05 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 #include <stdio.h>
 
+/**
+ * @brief Prints the parsed arguments to standard output for debugging.
+ *
+ * @param args Structure containing the parsed simulation arguments
+ */
 void	args_debug(t_args args)
 {
 	printf("---- debug args ----\n");
@@ -27,6 +32,14 @@ void	args_debug(t_args args)
 	printf("--------------------\n");
 }
 
+/**
+ * @brief Parses command line arguments into the simulation structure.
+ *
+ * @param args Pointer to the arguments structure to populate
+ * @param argc Number of command line arguments
+ * @param argv Array of command line argument strings
+ * @return 0 on success, error code otherwise
+ */
 int	args_parse(t_args *args, int argc, char **argv)
 {
 	(void)argc;

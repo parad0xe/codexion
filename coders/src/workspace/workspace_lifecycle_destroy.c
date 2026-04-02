@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:10:12 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/31 12:08:12 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:29:56 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include <pthread.h>
 #include <stdlib.h>
 
+/**
+ * @brief Frees all allocated memory within the workspace structure.
+ *
+ * @param workspace Pointer to the workspace structure to destroy
+ */
 void	workspace_destroy(t_workspace **workspace)
 {
 	if (*workspace == NULL)

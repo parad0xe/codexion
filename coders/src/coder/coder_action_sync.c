@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 11:57:28 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 12:40:23 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:15:17 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #include <pthread.h>
 #include <unistd.h>
 
+/**
+ * @brief Synchronizes the coder thread at startup and offsets odd IDs.
+ *
+ * @param coder Entity to be synchronized
+ */
 void	coder_sync(t_coder *coder)
 {
 	pthread_mutex_lock(coder->start_mutex);

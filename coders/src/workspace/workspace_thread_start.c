@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 01:12:33 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 12:01:46 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:30:07 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "workspace.h"
 #include <pthread.h>
 
+/**
+ * @brief Creates and launches all coder threads and the monitor.
+ *
+ * @param workspace Target workspace containing initialized coders
+ */
 void	workspace_thread_start(t_workspace *workspace)
 {
 	size_t	i;

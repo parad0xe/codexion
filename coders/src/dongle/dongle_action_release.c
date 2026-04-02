@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:14:17 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:40:27 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:23:49 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "utils.h"
 #include <pthread.h>
 
+/**
+ * @brief Safely releases the dongle and notifies waiting threads.
+ *
+ * @param dongle Target dongle to be released
+ */
 void	dongle_release_thread_safe(t_dongle *dongle)
 {
 	pthread_mutex_lock(&dongle->access_mutex);

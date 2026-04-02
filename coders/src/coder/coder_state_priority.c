@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 00:12:50 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 11:48:29 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:20:51 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include <stddef.h>
 #include <string.h>
 
+/**
+ * @brief Calculates the coder's scheduling priority based on the policy.
+ *
+ * @param coder Entity whose priority is being calculated
+ * @return The calculated priority value
+ */
 size_t	coder_get_priority(t_coder *coder)
 {
 	size_t	priority;

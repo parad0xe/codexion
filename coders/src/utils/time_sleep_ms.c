@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 13:35:21 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:36:20 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:27:04 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include <time.h>
 #include <unistd.h>
 
+/**
+ * @brief Suspends execution using micro-pauses until duration is reached.
+ *
+ * @param ms Amount of milliseconds to sleep
+ */
 void	time_sleep_ms(size_t ms)
 {
 	size_t	start;

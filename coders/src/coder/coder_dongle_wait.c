@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 11:51:31 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 12:53:20 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:18:19 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 #include <pthread.h>
 #include <unistd.h>
 
+/**
+ * @brief Removes the coder from both requested dongle queues.
+ *
+ * @param coder Entity being removed from the queues
+ * @param first Pointer to the first dongle queue
+ * @param second Pointer to the second dongle queue
+ */
 static void	_dequeue_both_thread_unsafe(t_coder *coder, t_dongle *first,
 		t_dongle *second)
 {
@@ -30,6 +37,13 @@ static void	_dequeue_both_thread_unsafe(t_coder *coder, t_dongle *first,
 		heapq_dequeue(second->queue);
 }
 
+/**
+ * @brief Safely adds the coder to both requested dongle queues.
+ *
+ * @param coder Entity being added to the queues
+ * @param first Pointer to the first dongle queue
+ * @param second Pointer to the second dongle queue
+ */
 static void	_enqueue_both_thread_safe(t_coder *coder, t_dongle *first,
 		t_dongle *second)
 {
@@ -41,6 +55,13 @@ static void	_enqueue_both_thread_safe(t_coder *coder, t_dongle *first,
 	pthread_mutex_unlock(&second->access_mutex);
 }
 
+/**
+ * @brief Checks if the given dongle is available and the coder has priority.
+ *
+ * @param coder Entity attempting to acquire the dongle
+ * @param dongle Target dongle to evaluate
+ * @return 1 if the dongle can be acquired, 0 otherwise
+ */
 static int	_can_acquire_dongle(t_coder *coder, t_dongle *dongle)
 {
 	t_heapq_data	*queued_coder;
@@ -54,6 +75,14 @@ static int	_can_acquire_dongle(t_coder *coder, t_dongle *dongle)
 	return (1);
 }
 
+/**
+ * @brief Evaluates dongle availability and attempts simultaneous lock.
+ *
+ * @param coder Entity attempting to acquire both dongles
+ * @param first First dongle to lock
+ * @param second Second dongle to lock
+ * @return 1 if both dongles are successfully acquired, 0 otherwise
+ */
 static int	_attempt_acquire(t_coder *coder, t_dongle *first, t_dongle *second)
 {
 	t_dongle	*wait_dongle;
@@ -81,6 +110,12 @@ static int	_attempt_acquire(t_coder *coder, t_dongle *first, t_dongle *second)
 	return (0);
 }
 
+/**
+ * @brief Puts the coder in a waiting queue to acquire both required dongles.
+ *
+ * @param coder The coder entity attempting to acquire dongles
+ * @return 1 if acquired successfully, 0 if a burnout occurred
+ */
 int	coder_dongle_wait(t_coder *coder)
 {
 	t_dongle	*first;

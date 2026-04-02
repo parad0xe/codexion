@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 12:03:46 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:26:42 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:14:34 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "utils.h"
 #include <unistd.h>
 
+/**
+ * @brief Executes the compilation action and resets the burnout timer.
+ *
+ * @param coder Entity executing the compilation action
+ */
 void	coder_compile(t_coder *coder)
 {
 	if (!coder_is_running_thread_safe(coder))

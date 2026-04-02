@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 16:45:18 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/01 12:46:55 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:22:42 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include <pthread.h>
 #include <stdlib.h>
 
+/**
+ * @brief Frees all allocated memory and destroys mutexes for the coders.
+ *
+ * @param coders Pointer to the coder array structure to destroy
+ */
 void	coder_destroy(t_coder_array **coders)
 {
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 12:06:53 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:27:01 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:13:23 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 
 // create difference between fifo and edf on powerful pc
 // usleep((coder->time_to_refactor + (rand() % 70)) * 1000);
+
+/**
+ * @brief Puts the coder in a refactoring state for a specified duration.
+ *
+ * @param coder Entity executing the refactoring action
+ */
 void	coder_refactor(t_coder *coder)
 {
 	if (!coder_is_running_thread_safe(coder))

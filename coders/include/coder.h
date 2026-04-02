@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:49:16 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:26:00 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:19:57 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void				*coder_routine(void *thread_args);
 
 // dongles
 int					coder_dongle_wait(t_coder *coder);
-void				coder_dongle_release(t_coder *coder);
+void				coder_dongle_release_thread_safe(t_coder *coder);
 void				coder_dongle_acquire_thread_unsafe(t_coder *coder);
 
 // actions

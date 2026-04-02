@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 16:45:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 11:46:23 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:22:33 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@
 #include <string.h>
 #include <time.h>
 
+/**
+ * @brief Initializes a single coder entity with its specific attributes.
+ *
+ * @param coder Pointer to the individual coder structure to initialize
+ * @param index Numerical position of the coder used to assign its ID
+ * @param sim Global simulation information and configuration
+ * @param dongles Array of shared dongle resources
+ * @return 0 on success, error code otherwise
+ */
 static t_errcode	_coder_init(t_coder *coder, int index, t_sim_info *sim,
 		t_dongle *dongles)
 {
@@ -39,6 +48,14 @@ static t_errcode	_coder_init(t_coder *coder, int index, t_sim_info *sim,
 	return (0);
 }
 
+/**
+ * @brief Initializes the array of coders and their shared synchronization.
+ *
+ * @param coders Array structure containing all coder entities
+ * @param sim Global simulation information and configuration
+ * @param dongles Array of shared dongle resources
+ * @return 0 on success, error code otherwise
+ */
 static t_errcode	_coders_init(t_coder_array *coders, t_sim_info *sim,
 		t_dongle *dongles)
 {
@@ -68,6 +85,13 @@ static t_errcode	_coders_init(t_coder_array *coders, t_sim_info *sim,
 	return (0);
 }
 
+/**
+ * @brief Allocates and initializes the full coder array for the simulation.
+ *
+ * @param sim Global simulation information and configuration
+ * @param dongles Array of shared dongle resources
+ * @return Pointer to the allocated coder array, or NULL on failure
+ */
 t_coder_array	*coder_create(t_sim_info *sim, t_dongle *dongles)
 {
 	t_coder_array	*coders;

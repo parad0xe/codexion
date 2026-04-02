@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 20:00:36 by nlallema          #+#    #+#             */
-/*   Updated: 2026/03/30 11:43:31 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:24:55 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+/**
+ * @brief Frees all allocated memory and mutexes for the dongles.
+ *
+ * @param dongles Pointer to the array of dongles to destroy
+ * @param count Number of initialized dongles in the array
+ */
 void	dongle_destroy(t_dongle **dongles, size_t count)
 {
 	size_t	i;

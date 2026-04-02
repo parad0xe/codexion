@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 00:45:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 12:53:41 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:23:36 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 #include <string.h>
 #include <unistd.h>
 
+/**
+ * @brief Main execution loop for an individual coder thread.
+ *
+ * @param thread_args Pointer to the coder entity structure
+ * @return NULL upon completion
+ */
 void	*coder_routine(void *thread_args)
 {
 	t_coder	*coder;
@@ -34,7 +40,7 @@ void	*coder_routine(void *thread_args)
 			if (!coder_is_running_thread_safe(coder))
 				break ;
 			coder_compile(coder);
-			coder_dongle_release(coder);
+			coder_dongle_release_thread_safe(coder);
 			coder_debug(coder);
 			coder_refactor(coder);
 		}

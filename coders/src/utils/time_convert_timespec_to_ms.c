@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 13:34:21 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 13:34:55 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/02 14:27:14 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 #include <time.h>
 #include <unistd.h>
 
+/**
+ * @brief Converts a timespec structure value into milliseconds.
+ *
+ * @param ts Target timespec structure to be converted
+ * @return The converted time in milliseconds
+ */
 size_t	time_convert_timespec_to_ms(struct timespec *ts)
 {
 	size_t	milliseconds;
