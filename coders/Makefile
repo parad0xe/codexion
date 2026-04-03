@@ -18,6 +18,8 @@ INCLUDES = -I include -I lib/heapq/include
 VALGRIND = valgrind --leak-check=full \
 		   --show-leak-kinds=all \
 		   --track-origins=yes -s --error-exitcode=1
+HELLGRIND = valgrind --tool=helgrind --history-level=approx \
+            -s --error-exitcode=1
 
 # files
 SRCS =\
@@ -120,6 +122,10 @@ all $(NAME) &:
 
 check: all
 	$(VALGRIND) ./$(NAME) $(ARGS)
+
+check-threads: all
+	$(HELLGRIND) ./$(NAME) $(ARGS)
+
 
 build-debug:
 	$(call switch_build_mode,prod,debug)

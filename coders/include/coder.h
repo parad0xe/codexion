@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 11:49:16 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 14:19:57 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/03 14:28:59 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ typedef struct s_coder
 	pthread_cond_t	*start_cond;
 	pthread_mutex_t	*start_mutex;
 	int				is_running;
-	pthread_mutex_t	is_running_mutex;
-	int				is_running_mutex_init;
+	pthread_mutex_t	access_mutex;
+	int				access_mutex_init;
 	size_t			compilation_count;
 	struct timespec	burnout_at;
 	t_dongle		*left_dongle;
@@ -68,11 +68,13 @@ void				coder_log_thread_safe(t_coder *coder, char *message,
 						int check_running);
 
 // state
-int					coder_has_burnout(t_coder *coder);
-size_t				coder_get_burnout_at(t_coder *coder);
+int					coder_has_burnout_thread_safe(t_coder *coder);
+size_t				coder_get_burnout_at_thread_safe(t_coder *coder);
 size_t				coder_get_priority(t_coder *coder);
 int					coder_is_running_thread_safe(t_coder *coder);
 void				coder_set_running_thread_safe(t_coder *coder,
 						int is_running);
+int					coder_reached_compilation_count_thread_safe(t_coder *coder);
+void				coder_reset_burnout_at_thread_safe(t_coder *coder);
 
 #endif

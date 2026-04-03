@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 16:45:18 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 14:22:42 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/03 14:25:12 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	coder_destroy(t_coder_array **coders)
 	i = 0;
 	while (i < (*coders)->count)
 	{
-		if ((*coders)->items[i].is_running_mutex_init)
-			pthread_mutex_destroy(&(*coders)->items[i].is_running_mutex);
+		if ((*coders)->items[i].access_mutex_init)
+			pthread_mutex_destroy(&(*coders)->items[i].access_mutex);
 		i++;
 	}
 	if ((*coders)->items != NULL)
