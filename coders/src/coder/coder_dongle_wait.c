@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 11:51:31 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 21:40:25 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/03 14:13:39 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void	_enqueue_both_thread_safe(t_coder *coder, t_dongle *first,
 {
 	t_errcode	errcode;
 
+	if (first == NULL || second == NULL)
+		return ;
 	pthread_mutex_lock(&first->access_mutex);
 	errcode = heapq_enqueue(first->queue, coder, coder_get_priority(coder));
 	if (errcode != 0)
@@ -132,21 +134,21 @@ int	coder_dongle_wait(t_coder *coder)
 	second = coder->right_dongle;
 	if (second == NULL)
 		time_sleep_ms(coder->sim->args.time_to_burnout);
-	if (second == NULL)
-		return (0);
 	if (coder->id % 2 != 0)
 	{
 		first = coder->right_dongle;
 		second = coder->left_dongle;
 	}
-	_enqueue_both_thread_safe(coder, first, second);
-	while (!coder_has_burnout(coder) && coder_is_running_thread_safe(coder))
+	if (first != NULL && second != NULL)
+		_enqueue_both_thread_safe(coder, first, second);
+	while (first != 0 && second != 0 && !coder_has_burnout_thread_safe(coder)
+		&& coder_is_running_thread_safe(coder))
 	{
 		if (_attempt_acquire(coder, first, second))
 		{
 			dongle_wait_cooldown(first);
 			dongle_wait_cooldown(second);
-			return (!coder_has_burnout(coder));
+			return (!coder_has_burnout_thread_safe(coder));
 		}
 	}
 	return (0);

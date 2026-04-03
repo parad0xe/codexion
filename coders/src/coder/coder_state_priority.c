@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 00:12:50 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 14:20:51 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/03 14:13:54 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ size_t	coder_get_priority(t_coder *coder)
 
 	priority = 0;
 	if (strcmp(coder->sim->args.scheduler, "edf") == 0)
-		priority = coder_get_burnout_at(coder);
+		priority = coder_get_burnout_at_thread_safe(coder);
 	return (priority);
 }

@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 16:45:14 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 18:19:48 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/03 14:24:32 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static t_errcode	_coder_init(t_coder *coder, int index, t_sim_info *sim,
 	coder->right_dongle = NULL;
 	if (sim->args.number_of_coders > 1)
 		coder->right_dongle = &dongles[right_dongle_index];
-	if (pthread_mutex_init(&coder->is_running_mutex, NULL) != 0)
+	if (pthread_mutex_init(&coder->access_mutex, NULL) != 0)
 		return (ERR_CODER_MUTEX_INIT);
-	coder->is_running_mutex_init = 1;
+	coder->access_mutex_init = 1;
 	coder->is_running = 1;
 	time_set_abstimeout(&coder->burnout_at, sim->args.time_to_burnout);
 	return (0);

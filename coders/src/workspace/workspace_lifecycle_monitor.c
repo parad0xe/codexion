@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 11:20:37 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 21:54:16 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/03 14:19:36 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ static int	_check_coders_state(t_workspace *ws)
 	while (i < ws->coders->count)
 	{
 		coder = &ws->coders->items[i];
-		if (coder_has_burnout(coder))
+		if (coder_has_burnout_thread_safe(coder))
 		{
 			_stop_coders(ws);
 			coder_log_thread_safe(coder, "burn out", LOG_ALWAYS);
 			return (1);
 		}
-		if (coder->compilation_count >= ws->sim->args.number_of_compiles)
+		if (coder_reached_compilation_count_thread_safe(coder))
 			completed++;
 		i++;
 	}

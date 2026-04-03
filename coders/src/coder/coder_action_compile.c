@@ -6,12 +6,13 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 12:03:46 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/02 14:14:34 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/03 14:38:07 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "coder.h"
 #include "utils.h"
+#include <pthread.h>
 #include <unistd.h>
 
 /**
@@ -21,10 +22,15 @@
  */
 void	coder_compile(t_coder *coder)
 {
+	unsigned int	sleep_ms;
+
 	if (!coder_is_running_thread_safe(coder))
 		return ;
+	coder_reset_burnout_at_thread_safe(coder);
 	coder_log_thread_safe(coder, "is compiling", LOG_IF_RUNNING);
-	time_set_abstimeout(&coder->burnout_at, coder->sim->args.time_to_burnout);
+	pthread_mutex_lock(&coder->access_mutex);
 	coder->compilation_count += 1;
-	time_sleep_ms(coder->sim->args.time_to_compile);
+	sleep_ms = coder->sim->args.time_to_compile;
+	pthread_mutex_unlock(&coder->access_mutex);
+	time_sleep_ms(sleep_ms);
 }

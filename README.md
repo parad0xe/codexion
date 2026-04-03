@@ -62,6 +62,7 @@ Run the simulation by providing the required parameters:
 |---------|------|-------------|
 | `make` / `make all` | production | compile the project with strict flags (`-Wall -Wextra -Werror`). |
 | `make check ARGS="..."` | production | compile and run the simulation through valgrind to check for memory leaks. |
+| `make check-threads ARGS="..."` | production | compile and run the simulation through hellgrind to check threads. |
 | `make tests` | production | compile and run all unit tests (append `TEST_VERBOSE=1` for detailed output). |
 | `make check-tests` | production | run all unit tests through valgrind to ensure complete memory safety. |
 | `make build-debug` | debug | compile the project with debug symbols (`-g3`) without strict flags. |
