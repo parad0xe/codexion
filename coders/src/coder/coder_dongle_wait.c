@@ -6,7 +6,7 @@
 /*   By: nlallema <nlallema@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 11:51:31 by nlallema          #+#    #+#             */
-/*   Updated: 2026/04/03 14:13:39 by nlallema         ###   ########lyon.fr   */
+/*   Updated: 2026/04/09 16:23:39 by nlallema         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,12 +144,10 @@ int	coder_dongle_wait(t_coder *coder)
 	while (first != 0 && second != 0 && !coder_has_burnout_thread_safe(coder)
 		&& coder_is_running_thread_safe(coder))
 	{
+		dongle_wait_cooldown(first);
+		dongle_wait_cooldown(second);
 		if (_attempt_acquire(coder, first, second))
-		{
-			dongle_wait_cooldown(first);
-			dongle_wait_cooldown(second);
 			return (!coder_has_burnout_thread_safe(coder));
-		}
 	}
 	return (0);
 }
